@@ -3,7 +3,7 @@
 import React from 'react';
 import { StyleSheet, FlatList, View, Text } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import PerUnit from './pages/PerUnit';
+import BaseImpedance from './pages/BaseImpedance';
 
 const styles = StyleSheet.create({
   container: {
@@ -15,9 +15,7 @@ const styles = StyleSheet.create({
 });
 
 const formulas = [{
-  perUnit: {
-    name: 'PerUnit'
-  }
+  key: 'BaseImpedance'
 }];
 
 const Formulas = () => (
@@ -31,5 +29,5 @@ const Formulas = () => (
 
 export default StackNavigator({
   Home: { screen: Formulas },
-  PerUnit: { screen: PerUnit }
+  BaseImpedance: { screen: BaseImpedance }
 });
