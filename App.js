@@ -15,17 +15,24 @@ const styles = StyleSheet.create({
 });
 
 const formulas = [{
-  key: 'BaseImpedance'
+  key: 'BaseImpedance',
+  name: 'Base Impedance'
 }];
 
-const Formulas = () => (
-  <View style={styles.container}>
-    <FlatList
-      data={formulas}
-      renderItem={({ item }) => <Text>{item.name}</Text>}
-    />
-  </View>
-);
+class Formulas extends React.Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <FlatList
+          data={formulas}
+          renderItem={({ item }) =>(
+            <Text>{item.name}</Text>
+          )}
+        />
+      </View>
+    );
+  }
+}
 
 export default StackNavigator({
   Home: { screen: Formulas },
