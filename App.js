@@ -1,33 +1,65 @@
 // @flow
 
-import React from 'react';
-import { StyleSheet, FlatList, View, Text } from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import BaseImpedance from './pages/BaseImpedance';
+import React from "react";
+import {
+  StyleSheet,
+  FlatList,
+  View,
+  Text,
+  TouchableOpacity
+} from "react-native";
+import { StackNavigator } from "react-navigation";
+import BaseImpedance from "./pages/BaseImpedance";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
+    backgroundColor: "#fafafa",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  button: {
+    borderColor: "#889dad",
+    borderStyle: "solid",
+    borderWidth: 1
+  },
+  buttonText: {
+    color: "#889dad"
   }
 });
 
-const formulas = [{
-  key: 'BaseImpedance',
-  name: 'Base Impedance'
-}];
-
 class Formulas extends React.Component {
+  state: {
+    formulas: Array<{
+      key: string,
+      name: string
+    }>
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      formulas: [
+        {
+          key: 'BaseImpedance',
+          name: 'Base Impedance'
+        }
+      ]
+    };
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <FlatList
-          data={formulas}
-          renderItem={({ item }) =>(
-            <Text>{item.name}</Text>
-          )}
+          data={this.state.formulas}
+          renderItem={({ item }) =>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => this.props.navigation.navigate("BaseImpedance")}
+            >
+              <Text style={styles.buttonText}>{item.name}</Text>
+            </TouchableOpacity>}
         />
       </View>
     );
