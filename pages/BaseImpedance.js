@@ -17,7 +17,11 @@ const BaseImpedance = () => (
   <View style={styles.container}>
     <Header>
       <Text> Base Impedance</Text>
+      <Text>19.2</Text>
     </Header>
+    Power
+    <TextInput style={styles.input} keyboardType="numeric" />
+    Voltage
     <TextInput style={styles.input} keyboardType="numeric" />
   </View>
 );
