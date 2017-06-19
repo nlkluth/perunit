@@ -1,34 +1,17 @@
 // @flow
 
 import React from "react";
-import {
-  StyleSheet,
-  FlatList,
-  View,
-  Text,
-  TouchableOpacity
-} from "react-native";
 import { StackNavigator } from "react-navigation";
-import BaseImpedance from "./pages/BaseImpedance";
+import FormulaDetail from "./pages/FormulaDetail";
+import Formulas from "./pages/Formulas";
+import { baseImpedance } from "./utils/formulas";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fafafa",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  button: {
-    borderColor: "#889dad",
-    borderStyle: "solid",
-    borderWidth: 1
-  },
-  buttonText: {
-    color: "#889dad"
-  }
+const Nav = StackNavigator({
+  Home: { screen: Formulas },
+  FormulaDetail: { screen: FormulaDetail }
 });
 
-class Formulas extends React.Component {
+export default class App extends React.Component {
   state: {
     formulas: Array<{
       key: string,
@@ -36,37 +19,41 @@ class Formulas extends React.Component {
     }>
   };
 
-  constructor(props) {
+  _onChange: Function;
+
+  constructor(props: Object) {
     super(props);
+    this._onChange = this._onChange.bind(this);
+
     this.state = {
       formulas: [
         {
-          key: 'BaseImpedance',
-          name: 'Base Impedance'
+          key: "BaseImpedance",
+          name: "Base Impedance",
+          inputs: [
+            {
+              voltage: 10,
+              power: 2
+            }
+          ],
+          formula: baseImpedance
         }
       ]
     };
   }
 
+  _onChange() {
+    console.log("changed");
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <FlatList
-          data={this.state.formulas}
-          renderItem={({ item }) =>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => this.props.navigation.navigate("BaseImpedance")}
-            >
-              <Text style={styles.buttonText}>{item.name}</Text>
-            </TouchableOpacity>}
-        />
-      </View>
+      <Nav
+        screenProps={{
+          formulas: this.state.formulas,
+          onChange: this._onChange
+        }}
+      />
     );
   }
 }
-
-export default StackNavigator({
-  Home: { screen: Formulas },
-  BaseImpedance: { screen: BaseImpedance }
-});

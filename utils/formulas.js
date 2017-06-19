@@ -11,4 +11,4 @@ function _baseImpedance([voltage, power], multiplier): number {
   return result / multiplier;
 }
 
-export const bsaeImpedance = adjust(_baseImpedance);
+export const baseImpedance = adjust(_baseImpedance);
