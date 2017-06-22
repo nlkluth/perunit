@@ -31,12 +31,13 @@ export default class App extends React.Component {
         name: "Base Impedance",
         inputs: {
           voltage: {
-            value: 10
+            value: '10'
           },
           power: {
-            value: 2
+            value: '2'
           }
         },
+        result: baseImpedance(['10', '2']),
         formula: baseImpedance
       }
     };
@@ -44,13 +45,17 @@ export default class App extends React.Component {
 
   _onChange(name, value, formula) {
     this.setState((previousState) => {
+      const inputs = previousState[formula].inputs;
+      const result = previousState[formula].formula([inputs.power.value, inputs.voltage.value]);
+
       return {
         [formula]: {
           ...previousState[formula],
           inputs: {
-            ...previousState[formula].inputs,
+            ...inputs,
             [name]: { value }
-          }
+          },
+          result
         }
       };
     });

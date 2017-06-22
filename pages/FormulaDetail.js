@@ -11,7 +11,7 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
     <View style={styles.container}>
       <Header>
         <Text>{formula.name}</Text>
-        <Text>19.2</Text>
+        <Text>{formula.result}</Text>
       </Header>
       {Object.keys(formula.inputs).map(inputName => {
         const input = formula.inputs[inputName];
@@ -25,7 +25,7 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
               onChangeText={text =>
                 screenProps.onChange(inputName, text, formula.key)}
               name={inputName}
-              value={input.value.toString()}
+              value={input.value}
             />
           </View>
         );
@@ -55,7 +55,7 @@ type formulaDetailType = {
     name: string,
     inputs: {
       T: {
-        value: number
+        value: string
       }
     }
   }>
