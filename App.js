@@ -13,10 +13,10 @@ const Nav = StackNavigator({
 
 export default class App extends React.Component {
   state: {
-    formulas: Array<{
+    T: {
       key: string,
       name: string
-    }>
+    }
   };
 
   _onChange: Function;
@@ -26,31 +26,41 @@ export default class App extends React.Component {
     this._onChange = this._onChange.bind(this);
 
     this.state = {
-      formulas: [
-        {
-          key: "BaseImpedance",
-          name: "Base Impedance",
-          inputs: [
-            {
-              voltage: 10,
-              power: 2
-            }
-          ],
-          formula: baseImpedance
-        }
-      ]
+      BaseImpedance: {
+        key: "BaseImpedance",
+        name: "Base Impedance",
+        inputs: {
+          voltage: {
+            value: 10
+          },
+          power: {
+            value: 2
+          }
+        },
+        formula: baseImpedance
+      }
     };
   }
 
-  _onChange() {
-    console.log("changed");
+  _onChange(name, value, formula) {
+    this.setState((previousState) => {
+      return {
+        [formula]: {
+          ...previousState[formula],
+          inputs: {
+            ...previousState[formula].inputs,
+            [name]: { value }
+          }
+        }
+      };
+    });
   }
 
   render() {
     return (
       <Nav
         screenProps={{
-          formulas: this.state.formulas,
+          formulas: this.state,
           onChange: this._onChange
         }}
       />

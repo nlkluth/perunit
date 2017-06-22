@@ -4,10 +4,8 @@ import React from "react";
 import { View, Text, StyleSheet, TextInput } from "react-native";
 import Header from "../components/Header";
 
-const FormulaDetail = ({ navigation, screenProps }) => {
-  const formula = screenProps.formulas.find(
-    item => item.key === navigation.state.params.name
-  );
+const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
+  const formula = screenProps.formulas[navigation.state.params.name];
 
   return (
     <View style={styles.container}>
@@ -15,18 +13,23 @@ const FormulaDetail = ({ navigation, screenProps }) => {
         <Text>{formula.name}</Text>
         <Text>19.2</Text>
       </Header>
-      <Text>Power</Text>
-      <TextInput
-        style={styles.input}
-        keyboardType="numeric"
-        onChange={screenProps.onChange}
-      />
-      <Text>Voltage</Text>
-      <TextInput
-        style={styles.input}
-        keyboardType="numeric"
-        onChange={screenProps.onChange}
-      />
+      {Object.keys(formula.inputs).map(inputName => {
+        const input = formula.inputs[inputName];
+
+        return (
+          <View key={inputName}>
+            <Text>{inputName}</Text>
+            <TextInput
+              style={styles.input}
+              keyboardType="numeric"
+              onChangeText={text =>
+                screenProps.onChange(inputName, text, formula.key)}
+              name={inputName}
+              value={input.value.toString()}
+            />
+          </View>
+        );
+      })}
     </View>
   );
 };
@@ -45,5 +48,17 @@ const styles = StyleSheet.create({
     borderWidth: 1
   }
 });
+
+type formulaDetailType = {
+  formulas: Array<{
+    key: string,
+    name: string,
+    inputs: {
+      T: {
+        value: number
+      }
+    }
+  }>
+};
 
 export default FormulaDetail;

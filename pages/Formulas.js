@@ -12,10 +12,11 @@ import {
 class Formulas extends React.Component {
   props: {
     screenProps: {
-      formulas: Array<{
-        key: string,
-        name: string
-      }>
+      Formulas: {
+        T: {
+          name: string
+        }
+      }
     }
   };
 
@@ -23,7 +24,7 @@ class Formulas extends React.Component {
     return (
       <View style={styles.container}>
         <FlatList
-          data={this.props.screenProps.formulas}
+          data={Object.keys(this.props.screenProps.formulas)}
           renderItem={({ item }) =>
             <TouchableOpacity
               style={styles.button}
@@ -32,7 +33,7 @@ class Formulas extends React.Component {
                   name: "BaseImpedance"
                 })}
             >
-              <Text style={styles.buttonText}>{item.name}</Text>
+              <Text style={styles.buttonText}>{item}</Text>
             </TouchableOpacity>}
         />
       </View>
