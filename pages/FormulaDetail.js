@@ -5,7 +5,7 @@ import { View, Text, StyleSheet, TextInput } from "react-native";
 import Header from "../components/Header";
 
 const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
-  const formula = screenProps.formulas[navigation.state.params.name];
+  const formula = screenProps.formulas.find((item) => item.name === navigation.state.params.name);
 
   return (
     <View style={styles.container}>
@@ -25,7 +25,7 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
               onChangeText={text =>
                 screenProps.onChange(inputName, text, formula.key)}
               name={inputName}
-              value={input.value}
+              value={input}
             />
           </View>
         );
@@ -54,9 +54,7 @@ type formulaDetailType = {
     key: string,
     name: string,
     inputs: {
-      T: {
-        value: string
-      }
+      [key: string]: string
     }
   }>
 };

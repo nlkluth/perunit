@@ -13,7 +13,7 @@ const Nav = StackNavigator({
 
 export default class App extends React.Component {
   state: {
-    T: {
+    [key: string]: {
       key: string,
       name: string
     }
@@ -26,37 +26,38 @@ export default class App extends React.Component {
     this._onChange = this._onChange.bind(this);
 
     this.state = {
-      BaseImpedance: {
+      formulas: [{
         key: "BaseImpedance",
         name: "Base Impedance",
         inputs: {
-          voltage: {
-            value: '10'
-          },
-          power: {
-            value: '2'
-          }
+          voltage: '10',
+          power: '2'
         },
         result: baseImpedance(['10', '2']),
         formula: baseImpedance
-      }
+      }]
     };
   }
 
   _onChange(name, value, formula) {
-    this.setState((previousState) => {
-      const inputs = previousState[formula].inputs;
-      const result = previousState[formula].formula([inputs.power.value, inputs.voltage.value]);
+    this.setState(({ formulas }) => {
+      const formulaIndex = formulas.findIndex((item) => item.key === formula);
+      const inputs = formulas[formulaIndex].inputs;
+      const result = formulas[formulaIndex].formula([inputs.power, inputs.voltage]);
 
       return {
-        [formula]: {
-          ...previousState[formula],
-          inputs: {
-            ...inputs,
-            [name]: { value }
+        formulas: [
+          ...formulas.slice(0, formulaIndex),
+          {
+            ...formulas[formulaIndex],
+            inputs: {
+              ...inputs,
+              [name]: value
+            },
+            result
           },
-          result
-        }
+          ...formulas.slice(formulaIndex + 1, formulas.length)
+        ]
       };
     });
   }
@@ -65,7 +66,7 @@ export default class App extends React.Component {
     return (
       <Nav
         screenProps={{
-          formulas: this.state,
+          formulas: this.state.formulas,
           onChange: this._onChange
         }}
       />

@@ -13,9 +13,7 @@ class Formulas extends React.Component {
   props: {
     screenProps: {
       Formulas: {
-        T: {
-          name: string
-        }
+        [key: string]: string
       }
     }
   };
@@ -24,16 +22,16 @@ class Formulas extends React.Component {
     return (
       <View style={styles.container}>
         <FlatList
-          data={Object.keys(this.props.screenProps.formulas)}
+          data={this.props.screenProps.formulas}
           renderItem={({ item }) =>
             <TouchableOpacity
               style={styles.button}
               onPress={() =>
                 this.props.navigation.navigate("FormulaDetail", {
-                  name: "BaseImpedance"
+                  name: item.name
                 })}
             >
-              <Text style={styles.buttonText}>{item}</Text>
+              <Text style={styles.buttonText}>{item.name}</Text>
             </TouchableOpacity>}
         />
       </View>
