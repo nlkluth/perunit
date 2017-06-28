@@ -13,23 +13,20 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
         <Text>{formula.name}</Text>
         <Text>{formula.result}</Text>
       </Header>
-      {Object.keys(formula.inputs).map(inputName => {
-        const input = formula.inputs[inputName];
-
-        return (
-          <View key={inputName}>
-            <Text>{inputName}</Text>
-            <TextInput
-              style={styles.input}
-              keyboardType="numeric"
-              onChangeText={text =>
-                screenProps.onChange(inputName, text, formula.key)}
-              name={inputName}
-              value={input}
-            />
-          </View>
-        );
-      })}
+      {formula.inputs.map(input => (
+        <View key={input.name}>
+          <Text>{input.name}</Text>
+          <TextInput
+            style={styles.input}
+            keyboardType="numeric"
+            onChangeText={text =>
+              screenProps.onChange(input.name, text, formula.key)}
+            name={input.name}
+            value={input.value}
+            returnKeyType="done"
+          />
+        </View>
+      ))}
     </View>
   );
 };
@@ -54,9 +51,12 @@ type formulaDetailType = {
   formulas: Array<{
     key: string,
     name: string,
-    inputs: {
-      [key: string]: string
-    }
+    inputs: Array<{
+      [key: string]: {
+        value: string,
+        error?: string
+      }
+    }>
   }>
 };
 

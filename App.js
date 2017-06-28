@@ -1,6 +1,7 @@
 // @flow
 
 import React from "react";
+import update from 'immutability-helper';
 import { StackNavigator } from "react-navigation";
 import FormulaDetail from "./pages/FormulaDetail";
 import Formulas from "./pages/Formulas";
@@ -14,10 +15,15 @@ const Nav = StackNavigator({
 
 export default class App extends React.Component {
   state: {
-    [key: string]: {
+    formulas: Array<{
       key: string,
-      name: string
-    }
+      name: string,
+      inputs: Array<{
+        name: string,
+        value: string,
+        error: string
+      }>
+    }>
   };
 
   _onChange: Function;
@@ -30,10 +36,18 @@ export default class App extends React.Component {
       formulas: [{
         key: "BaseImpedance",
         name: "Base Impedance",
-        inputs: {
-          voltage: '10',
-          power: '2'
-        },
+        inputs: [
+          {
+            name: 'voltage',
+            value: '10',
+            error: ''
+          },
+          {
+            name: 'power',
+            value: '2',
+            error: ''
+          }
+        ],
         result: baseImpedance(['10', '2']),
         formula: baseImpedance
       }],
@@ -44,38 +58,26 @@ export default class App extends React.Component {
   }
 
   _onChange(name, value, formula) {
-    this.setState(({ formulas, error }) => {
+    this.setState((previousState) => {
+      const { formulas, error } = previousState;
       const formulaIndex = formulas.findIndex((item) => item.key === formula);
+      const index = formulas[formulaIndex].inputs.findIndex((input) => input.name === name);
       const inputs = formulas[formulaIndex].inputs;
-      const result = formulas[formulaIndex].formula([inputs.power, inputs.voltage]);
+      const values = inputs.map((input) => input.value);
+      const result = formulas[formulaIndex].formula(values);
 
-      if (invalidInput(value) || invalidInput(result)) {
-        return {
-          error: {
-            shown: true,
-            value
-          }
-        }
-      }
-
-      return {
+      return update(previousState, {
         error: {
-          ...error,
-          shown: false
+          shown: { $set: false }
         },
-        formulas: [
-          ...formulas.slice(0, formulaIndex),
-          {
-            ...formulas[formulaIndex],
-            inputs: {
-              ...inputs,
-              [name]: value
-            },
-            result
-          },
-          ...formulas.slice(formulaIndex + 1, formulas.length)
-        ]
-      };
+        formulas: {
+          [formulaIndex]: { inputs: { [index]: {
+            value: { $set: value },
+            error: { $set: invalidInput(value) || invalidInput(result) }
+          }},
+          result: { $set: result }
+        }}
+      });
     });
   }
 
