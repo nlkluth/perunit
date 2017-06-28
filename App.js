@@ -63,7 +63,14 @@ export default class App extends React.Component {
       const formulaIndex = formulas.findIndex((item) => item.key === formula);
       const index = formulas[formulaIndex].inputs.findIndex((input) => input.name === name);
       const inputs = formulas[formulaIndex].inputs;
-      const values = inputs.map((input) => input.value);
+      const values = inputs.map((input) => {
+        if (input.name === name) {
+          return value;
+        }
+
+        return input.value
+      });
+      
       const result = formulas[formulaIndex].formula(values);
 
       return update(previousState, {
