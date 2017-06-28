@@ -5,16 +5,19 @@ export function invalidInput(numbers: Array<string> = [] | string) {
     numbers = [numbers];
   }
 
+  let error = '';
+
   numbers.forEach((num) => {
     const number = parseFloat(num);
 
     if (number === undefined || Number.isNaN(number)) {
-      return 'Number required';
+      error = 'Number required';
     }
 
     if (number === Number.POSITIVE_INFINITY || number === Number.NEGATIVE_INFINITY) {
-      console.log('returnin');
-      return 'Input too large';
+      error = 'Input too large';
     }
   });
+
+  return error;
 }

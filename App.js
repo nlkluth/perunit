@@ -49,10 +49,7 @@ export default class App extends React.Component {
       const inputs = formulas[formulaIndex].inputs;
       const result = formulas[formulaIndex].formula([inputs.power, inputs.voltage]);
 
-      console.log(invalidInput(result));
       if (invalidInput(value) || invalidInput(result)) {
-        debugger;
-
         return {
           error: {
             shown: true,
