@@ -1,11 +1,11 @@
-import react from 'react';
-import { TouchableOpacity, StyleSheet } from 'react-native';
+import React from 'react';
+import { TouchableOpacity, StyleSheet, Text } from 'react-native';
 
-const ListItem = ({ item }) => (
+const ListItem = ({ item, navigation }) => (
   <TouchableOpacity
     style={styles.button}
     onPress={() =>
-      this.props.navigation.navigate("FormulaDetail", {
+      navigation.navigate("FormulaDetail", {
         name: item.name
       })}
   >

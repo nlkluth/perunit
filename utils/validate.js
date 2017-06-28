@@ -1,18 +1,20 @@
 // @flow
 
-export function triggerError() {
-  console.error('error');
-}
+export function invalidInput(numbers: Array<string> = [] | string) {
+  if (!Array.isArray(numbers)) {
+    numbers = [numbers];
+  }
 
-export function invalidInput(numbers: Array<number> = []) {
-  numbers.forEach((number) => {
-    if (!number || Number.isNaN(number)) {
-      triggerError('Number required');
-      return;
+  numbers.forEach((num) => {
+    const number = parseFloat(num);
+
+    if (number === undefined || Number.isNaN(number)) {
+      return 'Number required';
     }
 
-    if (number === Number.Infinity) {
-      triggerError('Input too large');
+    if (number === Number.POSITIVE_INFINITY || number === Number.NEGATIVE_INFINITY) {
+      console.log('returnin');
+      return 'Input too large';
     }
   });
 }

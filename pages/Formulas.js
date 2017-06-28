@@ -19,12 +19,21 @@ class Formulas extends React.Component {
     }
   };
 
+  renderItem({ item }) {
+    return (
+      <ListItem
+        navigation={this.props.navigation}
+        item={item}
+      />
+    );
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <FlatList
           data={this.props.screenProps.formulas}
-          renderItem={ListItem}
+          renderItem={(info) => this.renderItem(info)}
         />
       </View>
     );
@@ -34,7 +43,7 @@ class Formulas extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fafafa",
+    padding: 4,
     alignItems: "center",
     justifyContent: "center"
   }

@@ -5,6 +5,7 @@ import { StackNavigator } from "react-navigation";
 import FormulaDetail from "./pages/FormulaDetail";
 import Formulas from "./pages/Formulas";
 import { baseImpedance } from "./utils/formulas";
+import { invalidInput } from './utils/validate';
 
 const Nav = StackNavigator({
   Home: { screen: Formulas },
@@ -35,17 +36,36 @@ export default class App extends React.Component {
         },
         result: baseImpedance(['10', '2']),
         formula: baseImpedance
-      }]
+      }],
+      error: {
+        display: false
+      }
     };
   }
 
   _onChange(name, value, formula) {
-    this.setState(({ formulas }) => {
+    this.setState(({ formulas, error }) => {
       const formulaIndex = formulas.findIndex((item) => item.key === formula);
       const inputs = formulas[formulaIndex].inputs;
       const result = formulas[formulaIndex].formula([inputs.power, inputs.voltage]);
 
+      console.log(invalidInput(result));
+      if (invalidInput(value) || invalidInput(result)) {
+        debugger;
+
+        return {
+          error: {
+            shown: true,
+            value
+          }
+        }
+      }
+
       return {
+        error: {
+          ...error,
+          shown: false
+        },
         formulas: [
           ...formulas.slice(0, formulaIndex),
           {

@@ -2,13 +2,13 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1
+  header: {
+    flexBasis: '40%'
   }
 });
 
 const Header = ({ children }) => (
-  <View>
+  <View style={styles.header}>
     {children}
   </View>
 );
