@@ -17,7 +17,7 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
         <View key={input.name}>
           <Text>{input.name}</Text>
           <TextInput
-            style={styles.input}
+            style={formula.error ? styles.inputError : styles.input}
             keyboardType="numeric"
             onChangeText={text =>
               screenProps.onChange(input.name, text, formula.key)}
@@ -44,20 +44,30 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: "#2a2a2a",
     borderWidth: 1
+  },
+  inputError: {
+    height: 40,
+    borderColor: '#b76363',
+    borderWidth: 1
   }
 });
 
 type formulaDetailType = {
-  formulas: Array<{
-    key: string,
-    name: string,
-    inputs: Array<{
-      [key: string]: {
+  navigation: {
+    state: {}
+  },
+  screenProps: {
+    onChange: function,
+    formulas: Array<{
+      key: string,
+      name: string,
+      inputs: Array<{
+        name: string,
         value: string,
         error?: string
-      }
+      }>
     }>
-  }>
+  }
 };
 
 export default FormulaDetail;

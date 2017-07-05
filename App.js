@@ -70,7 +70,7 @@ export default class App extends React.Component {
 
         return input.value
       });
-      
+
       const result = formulas[formulaIndex].formula(values);
 
       return update(previousState, {
