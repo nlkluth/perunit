@@ -19,7 +19,7 @@ function getPlaceValue(number: string): number {
  * Finds the longest decimal in a list of numbers
  * returns the multiplier (power of 10)
 **/
-function findMultiplier(numbers: Array<number> = []): number {
+function findMultiplier(numbers: Array<string> = []): number {
   const longestPlaceValue = numbers
     .map(getPlaceValue)
     .reduce((longest, current) => current > longest ? current : longest, 0);
@@ -31,10 +31,10 @@ function findMultiplier(numbers: Array<number> = []): number {
  * Wraps a function in order to pass in adjusted values
  * passes in multipler for un-adjustment to happen within callback
 **/
-export function adjust(callback) {
-  return (numbers: Array<number> = []): number => {
+export function adjust(callback: (Array<number>, number) => number) {
+  return (numbers: Array<string> = []): number => {
     const multiple = findMultiplier(numbers);
-    const adjusted = numbers.map((num) => num * multiple);
+    const adjusted = numbers.map((num) => parseFloat(num) * multiple);
     const result = callback(adjusted, multiple);
 
     return roundValue(result);
