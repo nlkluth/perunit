@@ -31,10 +31,6 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
   );
 };
 
-FormulaDetail.navigationOptions = {
-  title: "Base Impedance"
-};
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

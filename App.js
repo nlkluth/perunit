@@ -10,7 +10,9 @@ import { invalidInput } from './utils/validate';
 
 const Nav = StackNavigator({
   Home: { screen: Formulas },
-  FormulaDetail: { screen: FormulaDetail }
+  FormulaDetail: { screen: FormulaDetail, navigationOptions: ({ navigation }) => ({
+    title: navigation.state.params.name
+  })}
 });
 
 export default class App extends React.Component {
