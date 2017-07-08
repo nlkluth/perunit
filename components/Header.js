@@ -1,16 +1,15 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import React from "react";
+import { StyleSheet, View } from "react-native";
 
 const styles = StyleSheet.create({
   header: {
-    flexBasis: '40%'
+    flexBasis: "40%"
   }
 });
 
-const Header = ({ children }) => (
+const Header = ({ children }) =>
   <View style={styles.header}>
     {children}
-  </View>
-);
+  </View>;
 
 export default Header;

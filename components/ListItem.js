@@ -1,7 +1,7 @@
-import React from 'react';
-import { TouchableOpacity, StyleSheet, Text } from 'react-native';
+import React from "react";
+import { TouchableOpacity, StyleSheet, Text } from "react-native";
 
-const ListItem = ({ item, navigation }) => (
+const ListItem = ({ item, navigation }) =>
   <TouchableOpacity
     style={styles.button}
     onPress={() =>
@@ -10,8 +10,7 @@ const ListItem = ({ item, navigation }) => (
       })}
   >
     <Text style={styles.buttonText}>{item.name}</Text>
-  </TouchableOpacity>
-);
+  </TouchableOpacity>;
 
 const styles = StyleSheet.create({
   button: {

@@ -5,7 +5,9 @@ import { View, Text, StyleSheet, TextInput } from "react-native";
 import Header from "../components/Header";
 
 const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
-  const formula = screenProps.formulas.find((item) => item.name === navigation.state.params.name);
+  const formula = screenProps.formulas.find(
+    item => item.name === navigation.state.params.name
+  );
 
   return (
     <View style={styles.container}>
@@ -13,9 +15,11 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
         <Text>{formula.name}</Text>
         <Text>{formula.result}</Text>
       </Header>
-      {formula.inputs.map(input => (
+      {formula.inputs.map(input =>
         <View key={input.name}>
-          <Text style={input.error ? styles.labelError : null}>{input.name} {input.error}</Text>
+          <Text style={input.error ? styles.labelError : null}>
+            {input.name} {input.error}
+          </Text>
           <TextInput
             style={input.error ? styles.inputError : styles.input}
             keyboardType="numeric"
@@ -26,7 +30,7 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
             returnKeyType="done"
           />
         </View>
-      ))}
+      )}
     </View>
   );
 };
@@ -42,11 +46,11 @@ const styles = StyleSheet.create({
     borderWidth: 1
   },
   labelError: {
-    color: '#b76363'
+    color: "#b76363"
   },
   inputError: {
     height: 40,
-    borderColor: '#b76363',
+    borderColor: "#b76363",
     borderWidth: 1
   }
 });

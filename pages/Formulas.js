@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   StyleSheet
 } from "react-native";
-import ListItem from '../components/ListItem';
+import ListItem from "../components/ListItem";
 
 class Formulas extends React.Component {
   props: {
@@ -20,12 +20,7 @@ class Formulas extends React.Component {
   };
 
   renderItem({ item }) {
-    return (
-      <ListItem
-        navigation={this.props.navigation}
-        item={item}
-      />
-    );
+    return <ListItem navigation={this.props.navigation} item={item} />;
   }
 
   render() {
@@ -33,7 +28,7 @@ class Formulas extends React.Component {
       <View style={styles.container}>
         <FlatList
           data={this.props.screenProps.formulas}
-          renderItem={(info) => this.renderItem(info)}
+          renderItem={info => this.renderItem(info)}
         />
       </View>
     );
