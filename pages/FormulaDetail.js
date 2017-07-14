@@ -12,8 +12,8 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
   return (
     <View style={styles.container}>
       <Header>
-        <Text>{formula.name}</Text>
-        <Text>{formula.result}</Text>
+        <Text style={styles.headerName}>{formula.name}</Text>
+        <Text style={styles.formulaResult}>{formula.result}</Text>
       </Header>
       {formula.inputs.map(input =>
         <View key={input.name}>
@@ -44,6 +44,12 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: "#2a2a2a",
     borderWidth: 1
+  },
+  headerName: {
+    fontSize: 25
+  },
+  formulaResult: {
+    fontSize: 38
   },
   labelError: {
     color: "#b76363"
