@@ -12,7 +12,11 @@ function roundValue(number: number): number {
  * note, max decimal place is 16 in JS
 **/
 function getPlaceValue(number: string): number {
-  return parseFloat(number).toString().split('.')[1] && parseFloat(number).toString().split('.')[1].length || 0;
+  return (
+    (parseFloat(number).toString().split('.')[1] &&
+      parseFloat(number).toString().split('.')[1].length) ||
+    0
+  );
 }
 
 /**
@@ -22,7 +26,7 @@ function getPlaceValue(number: string): number {
 function findMultiplier(numbers: Array<string> = []): number {
   const longestPlaceValue = numbers
     .map(getPlaceValue)
-    .reduce((longest, current) => current > longest ? current : longest, 0);
+    .reduce((longest, current) => (current > longest ? current : longest), 0);
 
   return Math.pow(10, longestPlaceValue);
 }
@@ -34,9 +38,9 @@ function findMultiplier(numbers: Array<string> = []): number {
 export function adjust(callback: (Array<number>, number) => number) {
   return (numbers: Array<string> = []): number => {
     const multiple = findMultiplier(numbers);
-    const adjusted = numbers.map((num) => parseFloat(num) * multiple);
+    const adjusted = numbers.map(num => parseFloat(num) * multiple);
     const result = callback(adjusted, multiple);
 
     return roundValue(result);
-  }
+  };
 }

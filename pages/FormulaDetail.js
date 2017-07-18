@@ -1,8 +1,8 @@
 // @flow
 
-import React from "react";
-import { View, Text, StyleSheet, TextInput } from "react-native";
-import Header from "../components/Header";
+import React from 'react';
+import { View, Text, StyleSheet, TextInput } from 'react-native';
+import Header from '../components/Header';
 
 const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
   const formula = screenProps.formulas.find(
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    borderColor: "#2a2a2a",
+    borderColor: '#2a2a2a',
     borderWidth: 1
   },
   headerName: {
@@ -52,11 +52,11 @@ const styles = StyleSheet.create({
     fontSize: 38
   },
   labelError: {
-    color: "#b76363"
+    color: '#b76363'
   },
   inputError: {
     height: 40,
-    borderColor: "#b76363",
+    borderColor: '#b76363',
     borderWidth: 1
   }
 });

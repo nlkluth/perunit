@@ -1,14 +1,14 @@
 // @flow
 
-import React from "react";
+import React from 'react';
 import {
   FlatList,
   View,
   Text,
   TouchableOpacity,
   StyleSheet
-} from "react-native";
-import ListItem from "../components/ListItem";
+} from 'react-native';
+import ListItem from '../components/ListItem';
 
 class Formulas extends React.Component {
   props: {
@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 4,
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });
 
