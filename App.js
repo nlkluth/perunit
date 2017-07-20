@@ -1,12 +1,12 @@
 // @flow
 
-import React from "react";
-import update from "immutability-helper";
-import { StackNavigator } from "react-navigation";
-import FormulaDetail from "./pages/FormulaDetail";
-import Formulas from "./pages/Formulas";
-import { baseImpedance } from "./utils/formulas";
-import { invalidInput } from "./utils/validate";
+import React from 'react';
+import update from 'immutability-helper';
+import { StackNavigator } from 'react-navigation';
+import FormulaDetail from './pages/FormulaDetail';
+import Formulas from './pages/Formulas';
+import { baseImpedance } from './utils/formulas';
+import { invalidInput } from './utils/validate';
 
 const Nav = StackNavigator({
   Home: { screen: Formulas },
@@ -40,21 +40,24 @@ export default class App extends React.Component {
     this.state = {
       formulas: [
         {
-          key: "BaseImpedance",
-          name: "Base Impedance",
+          key: 'BaseImpedance',
+          name: 'Base Impedance',
           inputs: [
             {
-              name: "voltage",
-              value: "10",
-              error: ""
+              name: 'Voltage',
+              value: '10',
+              units: 'kV',
+              error: ''
             },
             {
-              name: "power",
-              value: "2",
-              error: ""
+              name: 'Power',
+              value: '2',
+              units: 'MVA',
+              error: ''
             }
           ],
-          result: baseImpedance(["10", "2"]),
+          result: baseImpedance(['10', '2']),
+          units: 'Ohms',
           formula: baseImpedance
         }
       ],

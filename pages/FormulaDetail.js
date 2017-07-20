@@ -14,11 +14,12 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
       <Header>
         <Text style={styles.headerName}>{formula.name}</Text>
         <Text style={styles.formulaResult}>{formula.result}</Text>
+        <Text>({formula.units})</Text>
       </Header>
       {formula.inputs.map(input =>
         <View key={input.name}>
           <Text style={input.error ? styles.labelError : null}>
-            {input.name} {input.error}
+            {input.name} ({input.units}) {input.error}
           </Text>
           <TextInput
             style={input.error ? styles.inputError : styles.input}
@@ -71,6 +72,7 @@ type formulaDetailType = {
       key: string,
       name: string,
       inputs: Array<{
+        units: string,
         name: string,
         value: string,
         error?: string
