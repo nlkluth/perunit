@@ -2,16 +2,17 @@
 
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { colors } from '../utils/styles';
 
 const styles = StyleSheet.create({
   header: {
     flexBasis: '40%',
     borderWidth: 2,
-    borderColor: '#889dad',
+    borderColor: colors.black,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 2
+    marginBottom: 15
   }
 });
 

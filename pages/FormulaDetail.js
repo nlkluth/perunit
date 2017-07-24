@@ -3,6 +3,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TextInput } from 'react-native';
 import Header from '../components/Header';
+import { colors } from '../utils/styles';
 
 const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
   const formula = screenProps.formulas.find(
@@ -39,12 +40,16 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 4
+    padding: 7,
+    backgroundColor: colors.white
   },
   input: {
     height: 40,
-    borderColor: '#2a2a2a',
-    borderWidth: 1
+    paddingRight: 4,
+    paddingLeft: 4,
+    borderColor: colors.black,
+    borderWidth: 1,
+    fontSize: 24
   },
   headerName: {
     fontSize: 25
@@ -53,11 +58,11 @@ const styles = StyleSheet.create({
     fontSize: 38
   },
   labelError: {
-    color: '#b76363'
+    color: colors.red
   },
   inputError: {
     height: 40,
-    borderColor: '#b76363',
+    borderColor: colors.red,
     borderWidth: 1
   }
 });

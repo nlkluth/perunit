@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   StyleSheet
 } from 'react-native';
+import { colors } from '../utils/styles';
 import ListItem from '../components/ListItem';
 
 class Formulas extends React.Component {
@@ -39,8 +40,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 4,
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: 'stretch',
+    backgroundColor: colors.white
   }
 });
 

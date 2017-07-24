@@ -3,6 +3,11 @@
 const NEAREST_DECIMAL = 1000;
 
 function roundValue(number: number): number {
+  // if (number < 1 && number > -1) {
+  //   console.log(number);
+  //   return number;
+  // }
+
   return Math.round(number * NEAREST_DECIMAL) / NEAREST_DECIMAL;
 }
 

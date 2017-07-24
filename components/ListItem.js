@@ -1,9 +1,19 @@
 // @flow
 
 import React from 'react';
+import { colors } from '../utils/styles';
 import { TouchableOpacity, StyleSheet, Text } from 'react-native';
 
-const ListItem = ({ item, navigation }) =>
+type listItemProps = {
+  item: {
+    name: string
+  },
+  navigation: {
+    navigate: () => {}
+  }
+};
+
+const ListItem = ({ item, navigation }: listItemProps) =>
   <TouchableOpacity
     style={styles.button}
     onPress={() =>
@@ -16,13 +26,17 @@ const ListItem = ({ item, navigation }) =>
 
 const styles = StyleSheet.create({
   button: {
-    borderColor: '#889dad',
+    borderColor: colors.grey,
     borderStyle: 'solid',
-    flexBasis: 100,
-    borderWidth: 1
+    flexBasis: '100%',
+    borderBottomWidth: 3,
+    padding: 10,
+    margin: 4
   },
   buttonText: {
-    color: '#889dad'
+    color: colors.black,
+    textAlign: 'center',
+    fontSize: 30
   }
 });
 

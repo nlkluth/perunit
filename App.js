@@ -5,7 +5,7 @@ import update from 'immutability-helper';
 import { StackNavigator } from 'react-navigation';
 import FormulaDetail from './pages/FormulaDetail';
 import Formulas from './pages/Formulas';
-import { baseImpedance } from './utils/formulas';
+import { baseCurrent, baseImpedance, perUnitImpedance } from './utils/formulas';
 import { invalidInput } from './utils/validate';
 
 const Nav = StackNavigator({
@@ -59,6 +59,53 @@ export default class App extends React.Component {
           result: baseImpedance(['10', '2']),
           units: 'Ohms',
           formula: baseImpedance
+        },
+        {
+          key: 'BaseCurrent',
+          name: 'Base Current',
+          inputs: [
+            {
+              name: 'Voltage',
+              value: '10',
+              units: 'kV',
+              error: ''
+            },
+            {
+              name: 'Power',
+              value: '2',
+              units: 'MVA',
+              error: ''
+            }
+          ],
+          result: baseCurrent(['10', '2']),
+          units: 'Amps',
+          formula: baseCurrent
+        },
+        {
+          key: 'PerUnitImpedance',
+          name: 'Per Unit Impedance',
+          inputs: [
+            {
+              name: 'Voltage',
+              value: '115',
+              units: 'kV',
+              error: ''
+            },
+            {
+              name: 'Power',
+              value: '100',
+              units: 'MVA',
+              error: ''
+            },
+            {
+              name: 'Ohms',
+              value: '50',
+              units: 'Ohms',
+              error: ''
+            }
+          ],
+          result: perUnitImpedance(['115', '100', '50']),
+          formula: perUnitImpedance
         }
       ],
       error: {
