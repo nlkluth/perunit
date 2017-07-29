@@ -20,14 +20,17 @@ const Nav = StackNavigator({
 
 export default class App extends React.Component {
   state: {
-    formulas: Array<{
-      key: string,
-      name: string,
-      inputs: Array<{
+    inputs: {
+      [key: string]: {
         name: string,
         value: string,
         error: string
-      }>
+      }
+    },
+    formulas: Array<{
+      key: string,
+      name: string,
+      inputs: Array<string>
     }>
   };
 
@@ -38,24 +41,31 @@ export default class App extends React.Component {
     this._onChange = this._onChange.bind(this);
 
     this.state = {
+      inputs: {
+        Voltage: {
+          name: 'Voltage',
+          value: '10',
+          units: 'kV',
+          error: ''
+        },
+        Power: {
+          name: 'Power',
+          value: '2',
+          units: 'MVA',
+          error: ''
+        },
+        Ohms: {
+          name: 'Ohms',
+          value: '50',
+          units: 'Ohms',
+          error: ''
+        }
+      },
       formulas: [
         {
           key: 'BaseImpedance',
           name: 'Base Impedance',
-          inputs: [
-            {
-              name: 'Voltage',
-              value: '10',
-              units: 'kV',
-              error: ''
-            },
-            {
-              name: 'Power',
-              value: '2',
-              units: 'MVA',
-              error: ''
-            }
-          ],
+          inputs: ['Voltage', 'Power'],
           result: baseImpedance(['10', '2']),
           units: 'Ohms',
           formula: baseImpedance
@@ -63,20 +73,7 @@ export default class App extends React.Component {
         {
           key: 'BaseCurrent',
           name: 'Base Current',
-          inputs: [
-            {
-              name: 'Voltage',
-              value: '10',
-              units: 'kV',
-              error: ''
-            },
-            {
-              name: 'Power',
-              value: '2',
-              units: 'MVA',
-              error: ''
-            }
-          ],
+          inputs: ['Voltage', 'Power'],
           result: baseCurrent(['10', '2']),
           units: 'Amps',
           formula: baseCurrent
@@ -84,26 +81,7 @@ export default class App extends React.Component {
         {
           key: 'PerUnitImpedance',
           name: 'Per Unit Impedance',
-          inputs: [
-            {
-              name: 'Voltage',
-              value: '115',
-              units: 'kV',
-              error: ''
-            },
-            {
-              name: 'Power',
-              value: '100',
-              units: 'MVA',
-              error: ''
-            },
-            {
-              name: 'Ohms',
-              value: '50',
-              units: 'Ohms',
-              error: ''
-            }
-          ],
+          inputs: ['Voltage', 'Power', 'Ohms'],
           result: perUnitImpedance(['115', '100', '50']),
           formula: perUnitImpedance
         }
@@ -116,18 +94,14 @@ export default class App extends React.Component {
 
   _onChange(name, value, formula) {
     this.setState(previousState => {
-      const { formulas, error } = previousState;
+      const { formulas, inputs, error } = previousState;
       const formulaIndex = formulas.findIndex(item => item.key === formula);
-      const index = formulas[formulaIndex].inputs.findIndex(
-        input => input.name === name
-      );
-      const inputs = formulas[formulaIndex].inputs;
-      const values = inputs.map(input => {
-        if (input.name === name) {
+      const values = Object.keys(inputs).map(key => {
+        if (inputs[key].name === name) {
           return value;
         }
 
-        return input.value;
+        return inputs[key].value;
       });
 
       const result = formulas[formulaIndex].formula(values);
@@ -136,14 +110,14 @@ export default class App extends React.Component {
         error: {
           shown: { $set: false }
         },
+        inputs: {
+          [name]: {
+            value: { $set: value },
+            error: { $set: invalidInput(value) || invalidInput(result) }
+          }
+        },
         formulas: {
           [formulaIndex]: {
-            inputs: {
-              [index]: {
-                value: { $set: value },
-                error: { $set: invalidInput(value) || invalidInput(result) }
-              }
-            },
             result: { $set: result }
           }
         }
@@ -155,7 +129,7 @@ export default class App extends React.Component {
     return (
       <Nav
         screenProps={{
-          formulas: this.state.formulas,
+          ...this.state,
           onChange: this._onChange
         }}
       />

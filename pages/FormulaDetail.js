@@ -10,29 +10,37 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
     item => item.name === navigation.state.params.name
   );
 
+  if (!formula) {
+    return <Text>Error</Text>;
+  }
+
   return (
     <View style={styles.container}>
       <Header>
         <Text style={styles.headerName}>{formula.name}</Text>
         <Text style={styles.formulaResult}>{formula.result}</Text>
-        <Text>({formula.units})</Text>
+        {formula.units && <Text>({formula.units})</Text>}
       </Header>
-      {formula.inputs.map(input =>
-        <View key={input.name}>
-          <Text style={input.error ? styles.labelError : null}>
-            {input.name} ({input.units}) {input.error}
-          </Text>
-          <TextInput
-            style={input.error ? styles.inputError : styles.input}
-            keyboardType="numeric"
-            onChangeText={text =>
-              screenProps.onChange(input.name, text, formula.key)}
-            name={input.name}
-            value={input.value}
-            returnKeyType="done"
-          />
-        </View>
-      )}
+      {formula.inputs.map(inputName => {
+        const input = screenProps.inputs[inputName];
+
+        return (
+          <View key={input.name}>
+            <Text style={input.error ? styles.labelError : null}>
+              {input.name} ({input.units}) {input.error}
+            </Text>
+            <TextInput
+              style={input.error ? styles.inputError : styles.input}
+              keyboardType="numeric"
+              onChangeText={text =>
+                screenProps.onChange(input.name, text, formula.key)}
+              name={input.name}
+              value={input.value}
+              returnKeyType="done"
+            />
+          </View>
+        );
+      })}
     </View>
   );
 };
@@ -69,19 +77,28 @@ const styles = StyleSheet.create({
 
 type formulaDetailType = {
   navigation: {
-    state: {}
+    state: {
+      params: {
+        name: string
+      }
+    }
   },
   screenProps: {
     onChange: (string, string, string) => void,
-    formulas: Array<{
-      key: string,
-      name: string,
-      inputs: Array<{
+    inputs: {
+      [key: string]: {
         units: string,
         name: string,
         value: string,
         error?: string
-      }>
+      }
+    },
+    formulas: Array<{
+      result: string,
+      key: string,
+      name: string,
+      units: string,
+      inputs: Array<string>
     }>
   }
 };
