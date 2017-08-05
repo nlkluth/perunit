@@ -6,7 +6,7 @@ import { StackNavigator } from 'react-navigation';
 import FormulaDetail from './pages/FormulaDetail';
 import Formulas from './pages/Formulas';
 import { baseCurrent, baseImpedance, perUnitImpedance } from './utils/formulas';
-import { invalidInput } from './utils/validate';
+import * as validation from './utils/validate';
 
 const Nav = StackNavigator({
   Home: { screen: Formulas },
@@ -46,19 +46,22 @@ export default class App extends React.Component {
           name: 'Voltage',
           value: '10',
           units: 'kV',
-          error: ''
+          error: '',
+          validation: [validation.size, validation.missing]
         },
         Power: {
           name: 'Power',
           value: '2',
           units: 'MVA',
-          error: ''
+          error: '',
+          validation: [validation.size, validation.missing, validation.nonZero]
         },
         Ohms: {
           name: 'Ohms',
           value: '50',
           units: 'Ohms',
-          error: ''
+          error: '',
+          validation: [validation.size, validation.missing]
         }
       },
       formulas: [
@@ -105,7 +108,6 @@ export default class App extends React.Component {
       });
 
       const result = formulas[formulaIndex].formula(values);
-
       return update(previousState, {
         error: {
           shown: { $set: false }
@@ -113,7 +115,9 @@ export default class App extends React.Component {
         inputs: {
           [name]: {
             value: { $set: value },
-            error: { $set: invalidInput(value) || invalidInput(result) }
+            error: {
+              $set: validation.validate(value, inputs[name].validation)
+            }
           }
         },
         formulas: {

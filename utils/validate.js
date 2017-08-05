@@ -1,26 +1,43 @@
-// @flow
+/**
+ * @flow
+ * List of functions used to validate inputs
+ * Pass as array of references to validate()
+**/
 
-export function invalidInput(numbers: Array<string> = [] | string) {
-  if (!Array.isArray(numbers)) {
-    numbers = [numbers];
+export function missing(number: number): string {
+  if (number === undefined || Number.isNaN(number)) {
+    return 'Number required';
   }
 
-  let error = '';
+  return '';
+}
 
-  numbers.forEach(num => {
-    const number = parseFloat(num);
+export function size(number: number): string {
+  if (
+    number === Number.POSITIVE_INFINITY ||
+    number === Number.NEGATIVE_INFINITY
+  ) {
+    return 'Number too large';
+  }
 
-    if (number === undefined || Number.isNaN(number)) {
-      error = 'Number required';
+  return '';
+}
+
+export function nonZero(number: number): string {
+  if (number === 0) {
+    return 'Number cannot be 0';
+  }
+
+  return '';
+}
+
+export function validate(value: string, functions: Array<() => string>) {
+  return functions.reduce((invalid, func) => {
+    const error = func(parseFloat(value));
+    if (error.length) {
+      return error;
     }
 
-    if (
-      number === Number.POSITIVE_INFINITY ||
-      number === Number.NEGATIVE_INFINITY
-    ) {
-      error = 'Input too large';
-    }
-  });
-
-  return error;
+    return invalid;
+  }, '');
 }
