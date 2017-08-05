@@ -116,7 +116,11 @@ export default class App extends React.Component {
           [name]: {
             value: { $set: value },
             error: {
-              $set: validation.validate(value, inputs[name].validation)
+              $set: validation.validate(
+                value,
+                inputs[name].validation ||
+                  validation.validate(value, [validation.size])
+              )
             }
           }
         },
