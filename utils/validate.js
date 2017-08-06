@@ -23,6 +23,17 @@ export function size(number: number): string {
   return '';
 }
 
+export function resultSize(number: number): string {
+  if (
+    number === Number.POSITIVE_INFINITY ||
+    number === Number.NEGATIVE_INFINITY
+  ) {
+    return 'Result too large';
+  }
+
+  return '';
+}
+
 export function nonZero(number: number): string {
   if (number === 0) {
     return 'Number cannot be 0';
