@@ -29,9 +29,8 @@ const styles = StyleSheet.create({
     borderColor: colors.grey,
     borderStyle: 'solid',
     flexBasis: '100%',
-    borderBottomWidth: 3,
-    padding: 10,
-    margin: 4
+    borderBottomWidth: 1,
+    padding: 10
   },
   buttonText: {
     color: colors.black,
