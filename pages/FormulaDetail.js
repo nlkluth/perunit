@@ -16,14 +16,9 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
 
   return (
     <View style={styles.container}>
-      <Header>
-        <Text style={styles.headerName}>{formula.name}</Text>
-        <Text style={styles.formulaResult}>{formula.result}</Text>
-        {formula.units && <Text>({formula.units})</Text>}
-      </Header>
+      <Header formula={formula} />
       {formula.inputs.map(inputName => {
         const input = screenProps.inputs[inputName];
-
         return (
           <View key={input.name}>
             <Text style={input.error ? styles.labelError : null}>
@@ -58,12 +53,6 @@ const styles = StyleSheet.create({
     borderColor: colors.black,
     borderWidth: 1,
     fontSize: 24
-  },
-  headerName: {
-    fontSize: 25
-  },
-  formulaResult: {
-    fontSize: 38
   },
   labelError: {
     color: colors.red
