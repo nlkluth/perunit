@@ -1,7 +1,13 @@
 // @flow
 
 import React from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  KeyboardAvoidingView
+} from 'react-native';
 import Header from '../components/Header';
 import { colors } from '../utils/styles';
 
@@ -15,7 +21,7 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} behavior="position">
       <Header formula={formula} />
       {formula.inputs.map(inputName => {
         const input = screenProps.inputs[inputName];
