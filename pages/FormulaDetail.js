@@ -23,25 +23,27 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
   return (
     <KeyboardAvoidingView style={styles.container} behavior="position">
       <Header formula={formula} />
-      {formula.inputs.map(inputName => {
-        const input = screenProps.inputs[inputName];
-        return (
-          <View key={input.name}>
-            <Text style={input.error ? styles.labelError : null}>
-              {input.name} ({input.units}) {input.error}
-            </Text>
-            <TextInput
-              style={input.error ? styles.inputError : styles.input}
-              keyboardType="numeric"
-              onChangeText={text =>
-                screenProps.onChange(input.name, text, formula.key)}
-              name={input.name}
-              value={input.value}
-              returnKeyType="done"
-            />
-          </View>
-        );
-      })}
+      <View>
+        {formula.inputs.map(inputName => {
+          const input = screenProps.inputs[inputName];
+          return (
+            <View key={input.name}>
+              <Text style={input.error ? styles.labelError : null}>
+                {input.name} ({input.units}) {input.error}
+              </Text>
+              <TextInput
+                style={input.error ? styles.inputError : styles.input}
+                keyboardType="numeric"
+                onChangeText={text =>
+                  screenProps.onChange(input.name, text, formula.key)}
+                name={input.name}
+                value={input.value}
+                returnKeyType="done"
+              />
+            </View>
+          );
+        })}
+      </View>
     </KeyboardAvoidingView>
   );
 };
