@@ -21,7 +21,7 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
   }
 
   return (
-    <View style={styles.container} behavior="position">
+    <KeyboardAvoidingView style={styles.container} behavior="position">
       <Header formula={formula} />
       {formula.inputs.map(inputName => {
         const input = screenProps.inputs[inputName];
@@ -42,7 +42,7 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
           </View>
         );
       })}
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
