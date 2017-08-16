@@ -51,7 +51,6 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 7,
     backgroundColor: colors.white
   },
   input: {
