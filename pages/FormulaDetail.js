@@ -27,6 +27,7 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
       <ScrollView style={styles.inputContainer}>
         {formula.inputs.map(inputName =>
           <FormulaInput
+            key={inputName}
             input={screenProps.inputs[inputName]}
             formula={formula}
             onChange={screenProps.onChange}

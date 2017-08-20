@@ -3,7 +3,7 @@ import { colors } from '../utils/styles';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 
 const FormulaInput = ({ input, formula, onChange }) =>
-  <View key={input.name}>
+  <View>
     <Text style={input.error ? styles.labelError : null}>
       {input.name} ({input.units}) {input.error}
     </Text>
