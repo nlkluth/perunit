@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {
-  View,
+  ScrollView,
   Text,
   StyleSheet,
   TextInput,
@@ -24,7 +24,7 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <Header formula={formula} />
-      <View style={styles.inputContainer}>
+      <ScrollView style={styles.inputContainer}>
         {formula.inputs.map(inputName =>
           <FormulaInput
             input={screenProps.inputs[inputName]}
@@ -32,7 +32,7 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
             onChange={screenProps.onChange}
           />
         )}
-      </View>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 };
