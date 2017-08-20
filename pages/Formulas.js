@@ -41,7 +41,6 @@ const Formulas = ({ navigation, screenProps }: props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 4,
     alignItems: 'stretch',
     backgroundColor: colors.white
   }
