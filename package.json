@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "flow-bin": "^0.42.0",
+    "flow-bin": "^0.53.1",
     "jest-expo": "~1.0.1",
     "prettier": "^1.4.4",
     "react-native-scripts": "0.0.31",

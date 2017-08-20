@@ -23,7 +23,7 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <Header formula={formula} />
-      <View>
+      <View style={styles.inputContainer}>
         {formula.inputs.map(inputName => {
           const input = screenProps.inputs[inputName];
           return (
@@ -32,7 +32,9 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
                 {input.name} ({input.units}) {input.error}
               </Text>
               <TextInput
-                style={input.error ? styles.inputError : styles.input}
+                style={
+                  input.error ? [styles.input, styles.inputError] : styles.input
+                }
                 keyboardType="numeric"
                 onChangeText={text =>
                   screenProps.onChange(input.name, text, formula.key)}
@@ -51,8 +53,10 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 7,
     backgroundColor: colors.white
+  },
+  inputContainer: {
+    padding: 10
   },
   input: {
     height: 40,
@@ -60,15 +64,14 @@ const styles = StyleSheet.create({
     paddingLeft: 4,
     borderColor: colors.black,
     borderWidth: 1,
+    marginBottom: 12,
     fontSize: 24
   },
   labelError: {
     color: colors.red
   },
   inputError: {
-    height: 40,
-    borderColor: colors.red,
-    borderWidth: 1
+    borderColor: colors.red
   }
 });
 

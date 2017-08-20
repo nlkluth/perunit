@@ -18,22 +18,22 @@ const Nav = StackNavigator({
   }
 });
 
-export default class App extends React.Component {
-  state: {
-    inputs: {
-      [key: string]: {
-        name: string,
-        value: string,
-        error: string
-      }
-    },
-    formulas: Array<{
-      key: string,
+type State = {
+  inputs: {
+    [key: string]: {
       name: string,
-      inputs: Array<string>
-    }>
-  };
+      value: string,
+      error: string
+    }
+  },
+  formulas: Array<{
+    key: string,
+    name: string,
+    inputs: Array<string>
+  }>
+};
 
+export default class App extends React.Component<State> {
   _onChange: Function;
 
   constructor(props: Object) {
