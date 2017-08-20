@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView
 } from 'react-native';
 import Header from '../components/Header';
+import FormulaInput from '../components/FormulaInput';
 import { colors } from '../utils/styles';
 
 const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
@@ -24,27 +25,13 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <Header formula={formula} />
       <View style={styles.inputContainer}>
-        {formula.inputs.map(inputName => {
-          const input = screenProps.inputs[inputName];
-          return (
-            <View key={input.name}>
-              <Text style={input.error ? styles.labelError : null}>
-                {input.name} ({input.units}) {input.error}
-              </Text>
-              <TextInput
-                style={
-                  input.error ? [styles.input, styles.inputError] : styles.input
-                }
-                keyboardType="numeric"
-                onChangeText={text =>
-                  screenProps.onChange(input.name, text, formula.key)}
-                name={input.name}
-                value={input.value}
-                returnKeyType="done"
-              />
-            </View>
-          );
-        })}
+        {formula.inputs.map(inputName =>
+          <FormulaInput
+            input={screenProps.inputs[inputName]}
+            formula={formula}
+            onChange={screenProps.onChange}
+          />
+        )}
       </View>
     </KeyboardAvoidingView>
   );
@@ -57,21 +44,6 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     padding: 10
-  },
-  input: {
-    height: 40,
-    paddingRight: 4,
-    paddingLeft: 4,
-    borderColor: colors.black,
-    borderWidth: 1,
-    marginBottom: 12,
-    fontSize: 24
-  },
-  labelError: {
-    color: colors.red
-  },
-  inputError: {
-    borderColor: colors.red
   }
 });
 

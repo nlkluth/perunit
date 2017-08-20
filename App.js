@@ -34,11 +34,11 @@ type State = {
 };
 
 export default class App extends React.Component<State> {
-  _onChange: Function;
+  onChange: Function;
 
   constructor(props: Object) {
     super(props);
-    this._onChange = this._onChange.bind(this);
+    this.onChange = this.onChange.bind(this);
 
     this.state = {
       inputs: {
@@ -95,7 +95,7 @@ export default class App extends React.Component<State> {
     };
   }
 
-  _onChange(name, value, formula) {
+  onChange(name, value, formula) {
     this.setState(previousState => {
       const { formulas, inputs, error } = previousState;
       const formulaIndex = formulas.findIndex(item => item.key === formula);
@@ -136,7 +136,7 @@ export default class App extends React.Component<State> {
       <Nav
         screenProps={{
           ...this.state,
-          onChange: this._onChange
+          onChange: this.onChange
         }}
       />
     );
