@@ -11,30 +11,32 @@ import {
 import { colors } from '../utils/styles';
 import ListItem from '../components/ListItem';
 
-class Formulas extends React.Component {
-  props: {
-    screenProps: {
-      Formulas: {
-        [key: string]: string
-      }
+type props = {
+  screenProps: {
+    Formulas: {
+      [key: string]: string
     }
-  };
+  }
+};
 
-  renderItem({ item }) {
-    return <ListItem navigation={this.props.navigation} item={item} />;
+type renderItem = {
+  name: string
+};
+
+const Formulas = ({ navigation, screenProps }: props) => {
+  function renderItem({ item }: renderItem) {
+    return <ListItem navigation={navigation} item={item} />;
   }
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <FlatList
-          data={this.props.screenProps.formulas}
-          renderItem={info => this.renderItem(info)}
-        />
-      </View>
-    );
-  }
-}
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={screenProps.formulas}
+        renderItem={info => renderItem(info)}
+      />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

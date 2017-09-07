@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     flexBasis: '100%',
     borderBottomWidth: 1,
-    padding: 14
+    padding: 16
   },
   buttonText: {
     color: colors.black,

@@ -40,8 +40,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.purple,
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 15
+    justifyContent: 'center'
   },
   headerName: {
     fontSize: 22,

@@ -18,27 +18,27 @@ const Nav = StackNavigator({
   }
 });
 
-export default class App extends React.Component {
-  state: {
-    inputs: {
-      [key: string]: {
-        name: string,
-        value: string,
-        error: string
-      }
-    },
-    formulas: Array<{
-      key: string,
+type State = {
+  inputs: {
+    [key: string]: {
       name: string,
-      inputs: Array<string>
-    }>
-  };
+      value: string,
+      error: string
+    }
+  },
+  formulas: Array<{
+    key: string,
+    name: string,
+    inputs: Array<string>
+  }>
+};
 
-  _onChange: Function;
+export default class App extends React.Component<State> {
+  onChange: Function;
 
   constructor(props: Object) {
     super(props);
-    this._onChange = this._onChange.bind(this);
+    this.onChange = this.onChange.bind(this);
 
     this.state = {
       inputs: {
@@ -95,7 +95,7 @@ export default class App extends React.Component {
     };
   }
 
-  _onChange(name, value, formula) {
+  onChange(name, value, formula) {
     this.setState(previousState => {
       const { formulas, inputs, error } = previousState;
       const formulaIndex = formulas.findIndex(item => item.key === formula);
@@ -136,7 +136,7 @@ export default class App extends React.Component {
       <Nav
         screenProps={{
           ...this.state,
-          onChange: this._onChange
+          onChange: this.onChange
         }}
       />
     );
