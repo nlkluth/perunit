@@ -67,7 +67,7 @@ type formulaDetailType = {
       }
     },
     formulas: Array<{
-      result: string,
+      result: number,
       key: string,
       name: string,
       units: string,

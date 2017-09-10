@@ -40,7 +40,7 @@ function findMultiplier(numbers: Array<string> = []): number {
  * Wraps a function in order to pass in adjusted values
  * passes in multipler for un-adjustment to happen within callback
 **/
-export function adjust(callback: (Array<number>, number) => number) {
+export function adjust(callback: (Array<number>, number) => number): number {
   return (numbers: Array<string> = []): number => {
     const multiple = findMultiplier(numbers);
     const adjusted = numbers.map(num => parseFloat(num) * multiple);

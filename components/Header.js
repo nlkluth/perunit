@@ -6,31 +6,31 @@ import { colors } from '../utils/styles';
 
 type properties = {
   formula: {
-    result: string,
+    result: number,
     name: string,
     units: string
   }
 };
 
 const Header = ({ formula }: properties) => {
-  const [number, exponent] = formula.result.split('e');
+  const [number, exponent] = formula.result.toString().split('e');
 
   return (
     <View style={styles.header}>
       <Text style={styles.headerName}>{formula.name}</Text>
       <Text style={styles.formulaResult}>
-        {formula.result}
-        {formula.exponent && (
-          <View style={styles.scientificNotation}>
-            <Text>x10</Text>
-            <Text style={styles.exponent}>{exponent}</Text>
-          </View>        
-        )}
+        {number}
+        {exponent &&
+          <Text style={styles.scientificNotation}>
+            x10
+            {' '}
+            <Text style={styles.exponent}>{exponent.substr(1)}</Text>
+          </Text>}
       </Text>
       {formula.units && <Text style={styles.units}>({formula.units})</Text>}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   header: {
@@ -49,14 +49,14 @@ const styles = StyleSheet.create({
   formulaResult: {
     fontSize: 40,
     color: colors.white,
-    whitespace: 'no-wrap'
+    maxWidth: '100%'
   },
   scientificNotation: {
     fontSize: 15
   },
-  exponent: {
-    verticalAlign: 'super'
-  },
+  // exponent: {
+  //   verticalAlign: 'super'
+  // },
   units: {
     color: colors.white
   }
