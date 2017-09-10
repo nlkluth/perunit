@@ -12,12 +12,25 @@ type properties = {
   }
 };
 
-const Header = ({ formula }: properties) =>
-  <View style={styles.header}>
-    <Text style={styles.headerName}>{formula.name}</Text>
-    <Text style={styles.formulaResult}>{formula.result}</Text>
-    {formula.units && <Text style={styles.units}>({formula.units})</Text>}
-  </View>;
+const Header = ({ formula }: properties) => {
+  const [number, exponent] = formula.result.split('e');
+
+  return (
+    <View style={styles.header}>
+      <Text style={styles.headerName}>{formula.name}</Text>
+      <Text style={styles.formulaResult}>
+        {formula.result}
+        {formula.exponent && (
+          <View style={styles.scientificNotation}>
+            <Text>x10</Text>
+            <Text style={styles.exponent}>{exponent}</Text>
+          </View>        
+        )}
+      </Text>
+      {formula.units && <Text style={styles.units}>({formula.units})</Text>}
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   header: {
@@ -35,7 +48,14 @@ const styles = StyleSheet.create({
   },
   formulaResult: {
     fontSize: 40,
-    color: colors.white
+    color: colors.white,
+    whitespace: 'no-wrap'
+  },
+  scientificNotation: {
+    fontSize: 15
+  },
+  exponent: {
+    verticalAlign: 'super'
   },
   units: {
     color: colors.white
