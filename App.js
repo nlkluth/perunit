@@ -15,10 +15,10 @@ const Nav = StackNavigator(
     Home: { screen: Formulas },
     Settings: {
       screen: Settings,
-      navigationOptions: () => ({
+      navigationOptions: {
         title: 'Settings',
         headerRight: null
-      })
+      }
     },
     FormulaDetail: {
       screen: FormulaDetail,
