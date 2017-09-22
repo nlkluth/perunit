@@ -5,7 +5,7 @@
   "devDependencies": {
     "flow-bin": "^0.53.1",
     "jest-expo": "~1.0.1",
-    "prettier": "^1.4.4",
+    "prettier": "^1.7.0",
     "react-native-scripts": "0.0.31",
     "react-test-renderer": "16.0.0-alpha.6"
   },
