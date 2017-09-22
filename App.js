@@ -1,14 +1,14 @@
 // @flow
 
-import React from "react";
-import { Button } from "react-native";
-import update from "immutability-helper";
-import { StackNavigator } from "react-navigation";
-import FormulaDetail from "./pages/FormulaDetail";
-import Formulas from "./pages/Formulas";
-import Settings from "./pages/Settings";
-import { baseCurrent, baseImpedance, perUnitImpedance } from "./utils/formulas";
-import * as validation from "./utils/validate";
+import React from 'react';
+import { Button } from 'react-native';
+import update from 'immutability-helper';
+import { StackNavigator } from 'react-navigation';
+import FormulaDetail from './pages/FormulaDetail';
+import Formulas from './pages/Formulas';
+import Settings from './pages/Settings';
+import { baseCurrent, baseImpedance, perUnitImpedance } from './utils/formulas';
+import * as validation from './utils/validate';
 
 const Nav = StackNavigator(
   {
@@ -16,7 +16,7 @@ const Nav = StackNavigator(
     Settings: {
       screen: Settings,
       navigationOptions: () => ({
-        title: "Settings",
+        title: 'Settings',
         headerRight: null
       })
     },
@@ -31,7 +31,7 @@ const Nav = StackNavigator(
     navigationOptions: ({ navigation }) => ({
       headerRight: (
         <Button
-          onPress={() => navigation.navigate("Settings")}
+          onPress={() => navigation.navigate('Settings')}
           title="Settings"
         />
       )
@@ -64,49 +64,49 @@ export default class App extends React.Component<State> {
     this.state = {
       inputs: {
         Voltage: {
-          name: "Voltage",
-          value: "10",
-          units: "kV",
-          error: "",
+          name: 'Voltage',
+          value: '10',
+          units: 'kV',
+          error: '',
           validation: [validation.size, validation.missing]
         },
         Power: {
-          name: "Power",
-          value: "2",
-          units: "MVA",
-          error: "",
+          name: 'Power',
+          value: '2',
+          units: 'MVA',
+          error: '',
           validation: [validation.size, validation.missing, validation.nonZero]
         },
         Ohms: {
-          name: "Ohms",
-          value: "50",
-          units: "Ohms",
-          error: "",
+          name: 'Ohms',
+          value: '50',
+          units: 'Ohms',
+          error: '',
           validation: [validation.size, validation.missing]
         }
       },
       formulas: [
         {
-          key: "BaseImpedance",
-          name: "Base Impedance",
-          inputs: ["Voltage", "Power"],
-          result: baseImpedance(["10", "2"]),
-          units: "Ohms",
+          key: 'BaseImpedance',
+          name: 'Base Impedance',
+          inputs: ['Voltage', 'Power'],
+          result: baseImpedance(['10', '2']),
+          units: 'Ohms',
           formula: baseImpedance
         },
         {
-          key: "BaseCurrent",
-          name: "Base Current",
-          inputs: ["Voltage", "Power"],
-          result: baseCurrent(["10", "2"]),
-          units: "Amps",
+          key: 'BaseCurrent',
+          name: 'Base Current',
+          inputs: ['Voltage', 'Power'],
+          result: baseCurrent(['10', '2']),
+          units: 'Amps',
           formula: baseCurrent
         },
         {
-          key: "PerUnitImpedance",
-          name: "Per Unit Impedance",
-          inputs: ["Voltage", "Power", "Ohms"],
-          result: perUnitImpedance(["115", "100", "50"]),
+          key: 'PerUnitImpedance',
+          name: 'Per Unit Impedance',
+          inputs: ['Voltage', 'Power', 'Ohms'],
+          result: perUnitImpedance(['115', '100', '50']),
           formula: perUnitImpedance
         }
       ],
