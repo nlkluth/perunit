@@ -6,38 +6,18 @@ import update from 'immutability-helper';
 import { StackNavigator } from 'react-navigation';
 import FormulaDetail from './pages/FormulaDetail';
 import Formulas from './pages/Formulas';
-import Settings from './pages/Settings';
 import { baseCurrent, baseImpedance, perUnitImpedance } from './utils/formulas';
 import * as validation from './utils/validate';
 
-const Nav = StackNavigator(
-  {
-    Home: { screen: Formulas },
-    Settings: {
-      screen: Settings,
-      navigationOptions: {
-        title: 'Settings',
-        headerRight: null
-      }
-    },
-    FormulaDetail: {
-      screen: FormulaDetail,
-      navigationOptions: ({ navigation }) => ({
-        title: navigation.state.params.name
-      })
-    }
-  },
-  {
+const Nav = StackNavigator({
+  Home: { screen: Formulas },
+  FormulaDetail: {
+    screen: FormulaDetail,
     navigationOptions: ({ navigation }) => ({
-      headerRight: (
-        <Button
-          onPress={() => navigation.navigate('Settings')}
-          title="Settings"
-        />
-      )
+      title: navigation.state.params.name
     })
   }
-);
+});
 
 type State = {
   inputs: {
