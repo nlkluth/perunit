@@ -34,6 +34,14 @@ export function resultSize(number: number): string {
   return '';
 }
 
+export function number(number: number): string {
+  if (isNaN(number) || typeof number !== 'number') {
+    return 'Must enter a number';
+  }
+
+  return '';
+}
+
 export function nonZero(number: number): string {
   if (number === 0) {
     return 'Number cannot be 0';

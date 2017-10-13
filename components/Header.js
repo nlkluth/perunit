@@ -17,15 +17,13 @@ const Header = ({ formula }: properties) => {
 
   return (
     <View style={styles.header}>
-      <Text style={styles.headerName}>{formula.name}</Text>
       <Text style={styles.formulaResult}>
-        {number}
-        {exponent &&
+        {formula.error ? 'Error' : number}
+        {exponent && (
           <Text style={styles.scientificNotation}>
-            x10
-            {' '}
-            <Text style={styles.exponent}>{exponent.substr(1)}</Text>
-          </Text>}
+            x10 <Text style={styles.exponent}>{exponent.substr(1)}</Text>
+          </Text>
+        )}
       </Text>
       {formula.units && <Text style={styles.units}>({formula.units})</Text>}
     </View>
@@ -34,17 +32,13 @@ const Header = ({ formula }: properties) => {
 
 const styles = StyleSheet.create({
   header: {
-    flexBasis: '40%',
+    flexBasis: '30%',
     borderWidth: 2,
     borderColor: colors.purple,
     backgroundColor: colors.purple,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  headerName: {
-    fontSize: 22,
-    color: colors.white
   },
   formulaResult: {
     fontSize: 40,

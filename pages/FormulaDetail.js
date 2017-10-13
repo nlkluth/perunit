@@ -25,14 +25,14 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <Header formula={formula} />
       <ScrollView style={styles.inputContainer}>
-        {formula.inputs.map(inputName =>
+        {formula.inputs.map(inputName => (
           <FormulaInput
             key={inputName}
             input={screenProps.inputs[inputName]}
             formula={formula}
             onChange={screenProps.onChange}
           />
-        )}
+        ))}
       </ScrollView>
     </KeyboardAvoidingView>
   );

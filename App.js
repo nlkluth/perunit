@@ -39,7 +39,6 @@ export default class App extends React.Component<State> {
 
   constructor(props: Object) {
     super(props);
-    this.onChange = this.onChange.bind(this);
 
     this.state = {
       inputs: {
@@ -72,7 +71,8 @@ export default class App extends React.Component<State> {
           inputs: ['Voltage', 'Power'],
           result: baseImpedance(['10', '2']),
           units: 'Ohms',
-          formula: baseImpedance
+          formula: baseImpedance,
+          error: false
         },
         {
           key: 'BaseCurrent',
@@ -80,23 +80,22 @@ export default class App extends React.Component<State> {
           inputs: ['Voltage', 'Power'],
           result: baseCurrent(['10', '2']),
           units: 'Amps',
-          formula: baseCurrent
+          formula: baseCurrent,
+          error: false
         },
         {
           key: 'PerUnitImpedance',
           name: 'Per Unit Impedance',
           inputs: ['Voltage', 'Power', 'Ohms'],
           result: perUnitImpedance(['115', '100', '50']),
-          formula: perUnitImpedance
+          formula: perUnitImpedance,
+          error: false
         }
-      ],
-      error: {
-        display: false
-      }
+      ]
     };
   }
 
-  onChange(name, value, formula) {
+  onChange = (name, value, formula) => {
     this.setState(previousState => {
       const { formulas, inputs, error } = previousState;
       const formulaIndex = formulas.findIndex(item => item.key === formula);
@@ -110,9 +109,6 @@ export default class App extends React.Component<State> {
 
       const result = formulas[formulaIndex].formula(values);
       return update(previousState, {
-        error: {
-          shown: { $set: false }
-        },
         inputs: {
           [name]: {
             value: { $set: value },
@@ -125,12 +121,18 @@ export default class App extends React.Component<State> {
         },
         formulas: {
           [formulaIndex]: {
-            result: { $set: result }
+            result: { $set: result },
+            error: {
+              $set: validation.validate(result, [
+                validation.resultSize,
+                validation.number
+              ])
+            }
           }
         }
       });
     });
-  }
+  };
 
   render() {
     return (
