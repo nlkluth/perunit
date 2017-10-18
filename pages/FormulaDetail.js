@@ -6,6 +6,7 @@ import {
   Text,
   StyleSheet,
   TextInput,
+  View,
   KeyboardAvoidingView
 } from 'react-native';
 import Header from '../components/Header';
@@ -22,7 +23,8 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
   }
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
+    <View>
+      {/*<KeyboardAvoidingView style={styles.container} behavior="padding">*/}
       <Header formula={formula} />
       <ScrollView style={styles.inputContainer}>
         {formula.inputs.map(inputName => (
@@ -34,7 +36,7 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
           />
         ))}
       </ScrollView>
-    </KeyboardAvoidingView>
+    </View>
   );
 };
 
