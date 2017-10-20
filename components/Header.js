@@ -17,7 +17,7 @@ const Header = ({ formula }: properties) => {
 
   return (
     <View style={styles.header}>
-      <Text style={styles.formulaResult}>
+      <Text style={styles.formulaResult} selectable>
         {formula.error ? 'Error' : number}
         {exponent && (
           <Text style={styles.scientificNotation}>
