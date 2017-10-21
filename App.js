@@ -97,30 +97,47 @@ export default class App extends React.Component<State> {
 
   onChange = (name, value, formula) => {
     this.setState(previousState => {
-      const { formulas, inputs, error } = previousState;
-      const formulaIndex = formulas.findIndex(item => item.key === formula);
-      const values = Object.keys(inputs).map(key => {
-        if (inputs[key].name === name) {
-          return value;
+      const { formulas, inputs } = previousState;
+
+      const updatedInputs = Object.keys(inputs).reduce((updated, key) => {
+        const input = inputs[key];
+        const newValue = input.name === name ? value : input.value;
+
+        updated[key] = update(input, {
+          value: { $set: newValue },
+          error: { $set: validation.validate(newValue, input.validation) }
+        });
+
+        return updated;
+      }, {});
+
+      // error: {
+      //   validation.validate(result, [
+      //     validation.resultSize,
+      //     validation.number
+      //   ])
+
+      const updatedFormulas = [];
+
+      formulas.forEach(formula => {
+        const formulaValues = formula.inputs.map(input => {
+          return inputs[input].value;
+        });
+
+        const result = formula.formula(formulaValues);
+        const resultError = validation.validate(result, [
+          validation.resultSize,
+          validation.number
+        ]);
+
+        if (resultError) {
+          formula.inputs.forEach(input => {
+            updatedInputs[input].error = resultError;
+          });
         }
 
-        return inputs[key].value;
-      });
-
-      const result = formulas[formulaIndex].formula(values);
-      return update(previousState, {
-        inputs: {
-          [name]: {
-            value: { $set: value },
-            error: {
-              $set:
-                validation.validate(value, inputs[name].validation) ||
-                validation.validate(result, [validation.resultSize])
-            }
-          }
-        },
-        formulas: {
-          [formulaIndex]: {
+        updatedFormulas.push(
+          update(formula, {
             result: { $set: result },
             error: {
               $set: validation.validate(result, [
@@ -128,8 +145,13 @@ export default class App extends React.Component<State> {
                 validation.number
               ])
             }
-          }
-        }
+          })
+        );
+      });
+
+      return update(previousState, {
+        inputs: { $set: updatedInputs },
+        formulas: { $set: updatedFormulas }
       });
     });
   };

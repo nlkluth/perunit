@@ -18,8 +18,12 @@ function roundValue(number: number): number {
 **/
 function getPlaceValue(number: string): number {
   return (
-    (parseFloat(number).toString().split('.')[1] &&
-      parseFloat(number).toString().split('.')[1].length) ||
+    (parseFloat(number)
+      .toString()
+      .split('.')[1] &&
+      parseFloat(number)
+        .toString()
+        .split('.')[1].length) ||
     0
   );
 }
