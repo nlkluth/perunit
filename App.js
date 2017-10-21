@@ -111,17 +111,11 @@ export default class App extends React.Component<State> {
         return updated;
       }, {});
 
-      // error: {
-      //   validation.validate(result, [
-      //     validation.resultSize,
-      //     validation.number
-      //   ])
-
       const updatedFormulas = [];
 
       formulas.forEach(formula => {
         const formulaValues = formula.inputs.map(input => {
-          return inputs[input].value;
+          return updatedInputs[input].value;
         });
 
         const result = formula.formula(formulaValues);
@@ -132,7 +126,8 @@ export default class App extends React.Component<State> {
 
         if (resultError) {
           formula.inputs.forEach(input => {
-            updatedInputs[input].error = resultError;
+            updatedInputs[input].error =
+              updatedInputs[input].error || resultError;
           });
         }
 
