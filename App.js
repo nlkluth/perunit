@@ -119,9 +119,10 @@ export default class App extends React.Component<State> {
         });
 
         const result = formula.formula(formulaValues);
+        // only error on size, not number for inputs
+        // this prevents 2nd input from reading "Enter a number"
         const resultError = validation.validate(result, [
-          validation.resultSize,
-          validation.number
+          validation.resultSize
         ]);
 
         if (resultError) {
