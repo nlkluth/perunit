@@ -95,7 +95,7 @@ export default class App extends React.Component<State> {
     };
   }
 
-  onChange = (name, value, formula) => {
+  onChange = (name, value, currentFormula) => {
     this.setState(previousState => {
       const { formulas, inputs } = previousState;
 
@@ -111,38 +111,21 @@ export default class App extends React.Component<State> {
         return updated;
       }, {});
 
-      const updatedFormulas = [];
-
-      formulas.forEach(formula => {
+      const updatedFormulas = formulas.map(formula => {
         const formulaValues = formula.inputs.map(input => {
           return updatedInputs[input].value;
         });
 
         const result = formula.formula(formulaValues);
-        // only error on size, not number for inputs
-        // this prevents 2nd input from reading "Enter a number"
-        const resultError = validation.validate(result, [
-          validation.resultSize
-        ]);
-
-        if (resultError) {
-          formula.inputs.forEach(input => {
-            updatedInputs[input].error =
-              updatedInputs[input].error || resultError;
-          });
-        }
-
-        updatedFormulas.push(
-          update(formula, {
-            result: { $set: result },
-            error: {
-              $set: validation.validate(result, [
-                validation.resultSize,
-                validation.number
-              ])
-            }
-          })
-        );
+        return update(formula, {
+          result: { $set: result },
+          error: {
+            $set: validation.validate(result, [
+              validation.resultSize,
+              validation.number
+            ])
+          }
+        });
       });
 
       return update(previousState, {

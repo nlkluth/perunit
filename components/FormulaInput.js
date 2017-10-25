@@ -2,21 +2,24 @@ import React from 'react';
 import { colors } from '../utils/styles';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 
-const FormulaInput = ({ input, formula, onChange }) => (
-  <View>
-    <Text style={input.error ? styles.labelError : null}>
-      {input.name} ({input.units}) {input.error}
-    </Text>
-    <TextInput
-      style={input.error ? [styles.input, styles.inputError] : styles.input}
-      keyboardType="numeric"
-      onChangeText={text => onChange(input.name, text, formula.key)}
-      name={input.name}
-      value={input.value}
-      returnKeyType="done"
-    />
-  </View>
-);
+const FormulaInput = ({ input, formula, onChange }) => {
+  const errorMessage = input.error || formula.error;
+  return (
+    <View>
+      <Text style={errorMessage ? styles.labelError : null}>
+        {input.name} ({input.units}) {errorMessage}
+      </Text>
+      <TextInput
+        style={errorMessage ? [styles.input, styles.inputError] : styles.input}
+        keyboardType="numeric"
+        onChangeText={text => onChange(input.name, text, formula.key)}
+        name={input.name}
+        value={input.value}
+        returnKeyType="done"
+      />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   input: {

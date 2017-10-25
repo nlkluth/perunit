@@ -36,7 +36,7 @@ export function resultSize(number: number): string {
 
 export function number(number: number): string {
   if (isNaN(number) || typeof number !== 'number') {
-    return 'Must enter a number';
+    return 'Must enter a number in all inputs';
   }
 
   return '';
