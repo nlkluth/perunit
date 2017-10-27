@@ -1,17 +1,12 @@
 // @flow
 
 import React from 'react';
-import {
-  FlatList,
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet
-} from 'react-native';
+import { FlatList, View, StyleSheet } from 'react-native';
 import { colors } from '../utils/styles';
 import ListItem from '../components/ListItem';
 
 type props = {
+  navigation: {},
   screenProps: {
     Formulas: {
       [key: string]: string
@@ -19,12 +14,8 @@ type props = {
   }
 };
 
-type renderItem = {
-  name: string
-};
-
 const Formulas = ({ navigation, screenProps }: props) => {
-  function renderItem({ item }: renderItem) {
+  function renderItem({ item }) {
     return <ListItem navigation={navigation} item={item} />;
   }
 

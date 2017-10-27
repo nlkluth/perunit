@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react';
-import { Button } from 'react-native';
 import update from 'immutability-helper';
 import { StackNavigator } from 'react-navigation';
 import FormulaDetail from './pages/FormulaDetail';
@@ -95,25 +94,17 @@ export default class App extends React.Component<State> {
     };
   }
 
-  onChange = (name, value, currentFormula) => {
+  onChange = (name, value) => {
     this.setState(previousState => {
       const { formulas, inputs } = previousState;
 
-      const updatedInputs = Object.keys(inputs).reduce((updated, key) => {
-        const input = inputs[key];
-        const newValue = input.name === name ? value : input.value;
-
-        updated[key] = update(input, {
-          value: { $set: newValue },
-          error: { $set: validation.validate(newValue, input.validation) }
-        });
-
-        return updated;
-      }, {});
-
       const updatedFormulas = formulas.map(formula => {
-        const formulaValues = formula.inputs.map(input => {
-          return updatedInputs[input].value;
+        const formulaValues = formula.inputs.map(inputName => {
+          if (inputName === name) {
+            return value;
+          }
+
+          return inputs[inputName].value;
         });
 
         const result = formula.formula(formulaValues);
@@ -129,7 +120,12 @@ export default class App extends React.Component<State> {
       });
 
       return update(previousState, {
-        inputs: { $set: updatedInputs },
+        inputs: {
+          [name]: {
+            value: { $set: value },
+            error: { $set: validation.validate(value, inputs[name].validation) }
+          }
+        },
         formulas: { $set: updatedFormulas }
       });
     });

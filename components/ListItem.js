@@ -13,7 +13,7 @@ type listItemProps = {
   }
 };
 
-const ListItem = ({ item, navigation }: listItemProps) =>
+const ListItem = ({ item, navigation }: listItemProps) => (
   <TouchableOpacity
     style={styles.button}
     onPress={() =>
@@ -22,7 +22,8 @@ const ListItem = ({ item, navigation }: listItemProps) =>
       })}
   >
     <Text style={styles.buttonText}>{item.name}</Text>
-  </TouchableOpacity>;
+  </TouchableOpacity>
+);
 
 const styles = StyleSheet.create({
   button: {

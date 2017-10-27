@@ -2,7 +2,7 @@ import React from 'react';
 import { colors } from '../utils/styles';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 
-const FormulaInput = ({ input, formula, onChange }) => {
+const FormulaInput = ({ input, formula, onChange }: formulaInputType) => {
   const errorMessage = input.error || formula.error;
   return (
     <View>
@@ -12,7 +12,7 @@ const FormulaInput = ({ input, formula, onChange }) => {
       <TextInput
         style={errorMessage ? [styles.input, styles.inputError] : styles.input}
         keyboardType="numeric"
-        onChangeText={text => onChange(input.name, text, formula.key)}
+        onChangeText={text => onChange(input.name, text)}
         name={input.name}
         value={input.value}
         returnKeyType="done"

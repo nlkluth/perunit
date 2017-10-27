@@ -1,14 +1,7 @@
 // @flow
 
 import React from 'react';
-import {
-  ScrollView,
-  Text,
-  StyleSheet,
-  TextInput,
-  View,
-  KeyboardAvoidingView
-} from 'react-native';
+import { ScrollView, Text, StyleSheet, View } from 'react-native';
 import Header from '../components/Header';
 import FormulaInput from '../components/FormulaInput';
 import { colors } from '../utils/styles';
