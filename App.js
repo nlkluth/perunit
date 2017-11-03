@@ -45,22 +45,19 @@ export default class App extends React.Component<State> {
           name: 'Voltage',
           value: '10',
           units: 'kV',
-          error: '',
-          validation: [validation.size, validation.missing]
+          error: ''
         },
         Power: {
           name: 'Power',
           value: '2',
           units: 'MVA',
-          error: '',
-          validation: [validation.size, validation.missing, validation.nonZero]
+          error: ''
         },
         Ohms: {
           name: 'Ohms',
           value: '50',
           units: 'Ohms',
-          error: '',
-          validation: [validation.size, validation.missing]
+          error: ''
         }
       },
       formulas: [
@@ -109,13 +106,8 @@ export default class App extends React.Component<State> {
 
         const result = formula.formula(formulaValues);
         return update(formula, {
-          result: { $set: result },
-          error: {
-            $set: validation.validate(result, [
-              validation.resultSize,
-              validation.number
-            ])
-          }
+          result: { $set: result }
+          // error: { $set: error }
         });
       });
 
@@ -123,7 +115,7 @@ export default class App extends React.Component<State> {
         inputs: {
           [name]: {
             value: { $set: value },
-            error: { $set: validation.validate(value, inputs[name].validation) }
+            error: { $set: validation.validateInput(value) }
           }
         },
         formulas: { $set: updatedFormulas }
