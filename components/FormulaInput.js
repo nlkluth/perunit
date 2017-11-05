@@ -12,10 +12,10 @@ const FormulaInput = ({ input, formula, onChange }: formulaInputType) => {
       <TextInput
         style={errorMessage ? [styles.input, styles.inputError] : styles.input}
         keyboardType="numeric"
+        returnKeyType="done"
         onChangeText={text => onChange(input.name, text)}
         name={input.name}
         value={input.value}
-        returnKeyType="done"
       />
     </View>
   );
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
 
 type formulaInputType = {
   onChange: (string, string, string) => void,
+  focusNextInput: () => void,
   input: {
     units: string,
     name: string,

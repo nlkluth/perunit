@@ -107,7 +107,7 @@ export default class App extends React.Component<State> {
         const result = formula.formula(formulaValues);
         return update(formula, {
           result: { $set: result },
-          error: { $set: validation.validateResult(result) }
+          error: { $set: validation.validateResult(result, value) }
         });
       });
 

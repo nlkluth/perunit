@@ -24,19 +24,23 @@ export function validateInput(number: string): string {
   if (isNaN(value) || typeof value !== 'number') {
     return 'Must enter a number in all inputs';
   }
+
+  return '';
 }
 
-export function validateResult(number: string): string {
-  const value = parseFloat(number);
+export function validateResult(result: string, number: string): string {
+  const value = parseFloat(result);
 
   if (
     value === Number.POSITIVE_INFINITY ||
     value === Number.NEGATIVE_INFINITY
   ) {
-    return 'Number too large';
+    return parseFloat(number) === 0 ? 'Cannot divide by 0' : 'Number too large';
   }
 
   if (isNaN(value) || typeof value !== 'number') {
-    return 'Must entera number in all inputs';
+    return 'Must enter a number in all inputs';
   }
+
+  return '';
 }
