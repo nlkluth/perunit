@@ -12,16 +12,30 @@ type properties = {
   }
 };
 
+const resultFontSize = (number) => {
+  if (number.length > 15) {
+    return 'sm';
+  }
+
+  if (number.length > 8) {
+    return 'md';
+  }
+
+  return 'lg'
+}
+
 const Header = ({ formula }: properties) => {
   const [number, exponent] = formula.result.toString().split('e');
 
   return (
     <View style={styles.header}>
-      <Text style={styles.formulaResult} selectable>
+      <Text style={[styles.formulaResult, resultFontSize(number)]} selectable>
         {formula.error ? 'Error' : number}
+      </Text>
+      <Text>
         {exponent && (
           <Text style={styles.scientificNotation}>
-            x10 <Text style={styles.exponent}>{exponent.substr(1)}</Text>
+            x10 <Text> {exponent.replace(/\+/, '')}</Text>
           </Text>
         )}
       </Text>
@@ -41,9 +55,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   formulaResult: {
-    fontSize: 40,
     color: colors.white,
-    maxWidth: '100%'
+    maxWidth: '100%',
+    textAlign: 'right'
+  },
+  sm: {
+    fontSize: 20
+  },
+  md: {
+    fontSize: 30
+  },
+  lg: {
+    fontSize: 40
   },
   scientificNotation: {
     fontSize: 15

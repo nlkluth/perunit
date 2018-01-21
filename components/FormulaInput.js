@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
 
 type formulaInputType = {
   onChange: (string, string, string) => void,
-  focusNextInput: () => void,
   input: {
     units: string,
     name: string,

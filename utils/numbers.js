@@ -2,13 +2,38 @@
 
 const NEAREST_DECIMAL = 1000;
 
+/**
+ * Rounds the number based on NEAREST_DECIMAL
+**/
 function roundValue(number: number): number {
-  // if (number < 1 && number > -1) {
-  //   console.log(number);
-  //   return number;
-  // }
+  const leadingZeroes = number.toString().match(/^0.[0]*/);
+  const exponentMatch = number.toString().match('e');
+
+  if (exponentMatch) {
+    return number;
+  }
+
+  if (leadingZeroes) {
+    return padLeadingZeroes(leadingZeroes, number);
+  }
 
   return Math.round(number * NEAREST_DECIMAL) / NEAREST_DECIMAL;
+}
+
+/**
+ * If there are leading zeroes, account for them to avoid rounding to 0
+ * Ex: 0.001235 will round to 0.00124 and not simply 0
+**/
+function padLeadingZeroes(leadingZeroes: string[], number: number): number {
+  const zeroesLength = leadingZeroes[0].length - 2;
+  const padding = Array(zeroesLength)
+    .fill(0)
+    .join('');
+  const updatedString = number.toString().replace(/0.[0]*/, '0.');
+  const rounded =
+    Math.round(parseFloat(updatedString) * NEAREST_DECIMAL) / NEAREST_DECIMAL;
+
+  return parseFloat(rounded.toString().replace(/0./, `0.${padding}`));
 }
 
 /**
@@ -44,7 +69,7 @@ function findMultiplier(numbers: Array<string> = []): number {
  * Wraps a function in order to pass in adjusted values
  * passes in multipler for un-adjustment to happen within callback
 **/
-export function adjust(callback: (Array<number>, number) => number): number {
+export function adjust(callback: (Array<number>, number) => number) {
   return (numbers: Array<string> = []): number => {
     const multiple = findMultiplier(numbers);
     const adjusted = numbers.map(num => parseFloat(num) * multiple);
