@@ -12,7 +12,7 @@ type properties = {
   }
 };
 
-const resultFontSize = (number) => {
+const resultFontSize = number => {
   if (number.length > 18) {
     return 'sm';
   }
@@ -21,15 +21,18 @@ const resultFontSize = (number) => {
     return 'md';
   }
 
-  return 'lg'
-}
+  return 'lg';
+};
 
 const Header = ({ formula }: properties) => {
   const [number, exponent] = formula.result.toString().split('e');
 
   return (
     <View style={styles.header}>
-      <Text style={[styles.formulaResult, styles[resultFontSize(number)]]} selectable>
+      <Text
+        style={[styles.formulaResult, styles[resultFontSize(number)]]}
+        selectable
+      >
         {formula.error ? 'Error' : number}
       </Text>
       <Text style={styles.exponent}>
@@ -46,7 +49,7 @@ const Header = ({ formula }: properties) => {
 
 const styles = StyleSheet.create({
   header: {
-    flexBasis: '30%',
+    flexBasis: '22%',
     borderWidth: 2,
     borderColor: colors.purple,
     backgroundColor: colors.purple,

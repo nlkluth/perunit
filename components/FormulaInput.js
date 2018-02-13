@@ -1,8 +1,13 @@
 import React from 'react';
-import { colors } from '../utils/styles';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
+import { colors } from '../utils/styles';
 
-const FormulaInput = ({ input, formula, onChange }: formulaInputType) => {
+const FormulaInput = ({
+  input,
+  formula,
+  onChange,
+  firstIndex
+}: formulaInputType) => {
   const errorMessage = input.error || formula.error;
   return (
     <View>
@@ -12,7 +17,7 @@ const FormulaInput = ({ input, formula, onChange }: formulaInputType) => {
       <TextInput
         style={errorMessage ? [styles.input, styles.inputError] : styles.input}
         keyboardType="numeric"
-        returnKeyType="done"
+        autoFocus={firstIndex}
         onChangeText={text => onChange(input.name, text)}
         name={input.name}
         value={input.value}
@@ -47,6 +52,7 @@ type formulaInputType = {
     value: string,
     error?: string
   },
+  firstIndex: boolean,
   formula: {
     result: string,
     key: string,

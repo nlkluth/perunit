@@ -1,15 +1,15 @@
 // @flow
 
 import React from 'react';
-import { colors } from '../utils/styles';
 import { TouchableOpacity, StyleSheet, Text } from 'react-native';
+import { colors } from '../utils/styles';
 
 type listItemProps = {
   item: {
     name: string
   },
   navigation: {
-    navigate: () => {}
+    navigate: (name: string) => {}
   }
 };
 
@@ -19,7 +19,8 @@ const ListItem = ({ item, navigation }: listItemProps) => (
     onPress={() =>
       navigation.navigate('FormulaDetail', {
         name: item.name
-      })}
+      })
+    }
   >
     <Text style={styles.buttonText}>{item.name}</Text>
   </TouchableOpacity>

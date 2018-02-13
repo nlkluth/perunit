@@ -4,7 +4,7 @@ const NEAREST_DECIMAL = 1000;
 
 /**
  * Rounds the number based on NEAREST_DECIMAL
-**/
+ **/
 function roundValue(number: number): number {
   const leadingZeroes = number.toString().match(/^0.[0]*/);
   const exponentMatch = number.toString().match('e');
@@ -23,7 +23,7 @@ function roundValue(number: number): number {
 /**
  * If there are leading zeroes, account for them to avoid rounding to 0
  * Ex: 0.001235 will round to 0.00124 and not simply 0
-**/
+ **/
 function padLeadingZeroes(leadingZeroes: string[], number: number): number {
   const zeroesLength = leadingZeroes[0].length - 2;
   const padding = Array(zeroesLength)
@@ -40,7 +40,7 @@ function padLeadingZeroes(leadingZeroes: string[], number: number): number {
  * Takes in a number string and returns decimal length
  * to be used for adjusting decimals to integers using findMultiplier
  * note, max decimal place is 16 in JS
-**/
+ **/
 function getPlaceValue(number: string): number {
   return (
     (parseFloat(number)
@@ -56,7 +56,7 @@ function getPlaceValue(number: string): number {
 /**
  * Finds the longest decimal in a list of numbers
  * returns the multiplier (power of 10)
-**/
+ **/
 function findMultiplier(numbers: Array<string> = []): number {
   const longestPlaceValue = numbers
     .map(getPlaceValue)
@@ -67,13 +67,13 @@ function findMultiplier(numbers: Array<string> = []): number {
 
 /**
  * Wraps a function in order to pass in adjusted values
- * passes in multipler for un-adjustment to happen within callback
-**/
-export function adjust(callback: (Array<number>, number) => number) {
+ * divides by multipler to un-adjust afterwards
+ **/
+export function adjust(callback: (Array<number>) => number) {
   return (numbers: Array<string> = []): number => {
     const multiple = findMultiplier(numbers);
     const adjusted = numbers.map(num => parseFloat(num) * multiple);
-    const result = callback(adjusted, multiple);
+    const result = callback(adjusted) / multiple;
 
     return roundValue(result);
   };

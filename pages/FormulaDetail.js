@@ -17,12 +17,16 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
 
   return (
     <View>
-      {/*<KeyboardAvoidingView style={styles.container} behavior="padding">*/}
+      {/* <KeyboardAvoidingView style={styles.container} behavior="padding"> */}
       <Header formula={formula} />
-      <ScrollView style={styles.inputContainer}>
-        {formula.inputs.map(inputName => (
+      <ScrollView
+        style={styles.inputContainer}
+        keyboardShouldPersistTaps="always"
+      >
+        {formula.inputs.map((inputName, index) => (
           <FormulaInput
             key={inputName}
+            firstIndex={index === 0}
             input={screenProps.inputs[inputName]}
             formula={formula}
             onChange={screenProps.onChange}
