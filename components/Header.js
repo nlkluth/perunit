@@ -26,7 +26,6 @@ const resultFontSize = number => {
 
 const Header = ({ formula }: properties) => {
   const formulaString = formula.result.toString();
-  const [number, exponent] = formulaString.split('e');
 
   return (
     <View style={styles.header}>
@@ -34,13 +33,7 @@ const Header = ({ formula }: properties) => {
         style={[styles.formulaResult, styles[resultFontSize(formulaString)]]}
         selectable
       >
-        {formula.error ? 'Error' : number}
-        {exponent && (
-          <Text>
-            x10{' '}
-            <Text style={styles.exponent}> {exponent.replace(/\+/, '')}</Text>
-          </Text>
-        )}
+        {formula.error ? 'Error' : formulaString}
       </Text>
       {formula.units && <Text style={styles.units}>({formula.units})</Text>}
     </View>
@@ -70,9 +63,6 @@ const styles = StyleSheet.create({
   },
   lg: {
     fontSize: 40
-  },
-  exponent: {
-    color: colors.white
   },
   units: {
     color: colors.white,
