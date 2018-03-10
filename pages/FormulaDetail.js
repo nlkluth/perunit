@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { ScrollView, Text, StyleSheet, View } from 'react-native';
+import { ScrollView, Text, StyleSheet, View, StatusBar } from 'react-native';
 import Header from '../components/Header';
 import FormulaInput from '../components/FormulaInput';
 import { colors } from '../utils/styles';
@@ -17,7 +17,7 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
 
   return (
     <View>
-      {/* <KeyboardAvoidingView style={styles.container} behavior="padding"> */}
+      <StatusBar barStyle="light-content" />
       <Header formula={formula} />
       <ScrollView
         style={styles.inputContainer}

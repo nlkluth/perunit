@@ -7,16 +7,33 @@ import FormulaDetail from './pages/FormulaDetail';
 import Formulas from './pages/Formulas';
 import { baseCurrent, baseImpedance, perUnitImpedance } from './utils/formulas';
 import * as validation from './utils/validate';
+import { colors } from './utils/styles';
 
-const Nav = StackNavigator({
-  Home: { screen: Formulas },
-  FormulaDetail: {
-    screen: FormulaDetail,
-    navigationOptions: ({ navigation }) => ({
-      title: navigation.state.params.name
+const Nav = StackNavigator(
+  {
+    Home: {
+      screen: Formulas
+    },
+    FormulaDetail: {
+      screen: FormulaDetail,
+      navigationOptions: ({ navigation }) => ({
+        title: navigation.state.params.name
+      })
+    }
+  },
+  {
+    navigationOptions: () => ({
+      headerStyle: {
+        borderBottomWidth: 0,
+        backgroundColor: colors.purple
+      },
+      headerTintColor: colors.white,
+      headerTitleStyle: {
+        color: colors.white
+      }
     })
   }
-});
+);
 
 type State = {
   inputs: {

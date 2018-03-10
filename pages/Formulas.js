@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { FlatList, View, StyleSheet } from 'react-native';
+import { FlatList, View, StyleSheet, StatusBar } from 'react-native';
 import { colors } from '../utils/styles';
 import ListItem from '../components/ListItem';
 
@@ -21,6 +21,7 @@ const Formulas = ({ navigation, screenProps }: props) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="light-content" />
       <FlatList
         data={screenProps.formulas}
         renderItem={info => renderItem(info)}

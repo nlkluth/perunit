@@ -42,12 +42,12 @@ const Header = ({ formula }: properties) => {
 
 const styles = StyleSheet.create({
   header: {
-    flexBasis: '22%',
+    flexBasis: '16%',
     borderWidth: 2,
     borderColor: colors.purple,
     backgroundColor: colors.purple,
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     justifyContent: 'center'
   },
   formulaResult: {
