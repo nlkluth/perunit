@@ -15,7 +15,7 @@ type props = {
 };
 
 const Formulas = ({ navigation, screenProps }: props) => {
-  function renderItem({ item }) {
+  function renderItem({ item }: { item: {} }) {
     return <ListItem navigation={navigation} item={item} />;
   }
 

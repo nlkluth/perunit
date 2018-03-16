@@ -31,10 +31,10 @@ const styles = StyleSheet.create({
     height: 40,
     paddingRight: 4,
     paddingLeft: 4,
-    borderColor: colors.black,
-    borderWidth: 1,
+    borderColor: colors.grey,
+    borderBottomWidth: 1,
     marginBottom: 12,
-    fontSize: 24
+    fontSize: 32
   },
   labelError: {
     color: colors.red

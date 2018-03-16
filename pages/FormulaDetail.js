@@ -16,7 +16,7 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       <StatusBar barStyle="light-content" />
       <Header formula={formula} />
       <ScrollView

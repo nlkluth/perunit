@@ -53,7 +53,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowOffset: {
       height: 3
-    }
+    },
+    paddingRight: 4,
+    paddingLeft: 4
   },
   formulaResult: {
     color: colors.white,
