@@ -1,7 +1,13 @@
 // @flow
 
 import React from 'react';
-import { ScrollView, Text, StyleSheet, View, StatusBar } from 'react-native';
+import {
+  ScrollView,
+  Text,
+  StyleSheet,
+  KeyboardAvoidingView,
+  StatusBar
+} from 'react-native';
 import Header from '../components/Header';
 import FormulaInput from '../components/FormulaInput';
 import { colors } from '../utils/styles';
@@ -16,13 +22,14 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
   }
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior="height"
+      keyboardVerticalOffset={66}
+    >
       <StatusBar barStyle="light-content" />
       <Header formula={formula} />
-      <ScrollView
-        style={styles.inputContainer}
-        keyboardShouldPersistTaps="always"
-      >
+      <ScrollView style={styles.inputContainer}>
         {formula.inputs.map((inputName, index) => (
           <FormulaInput
             key={inputName}
@@ -33,7 +40,7 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
           />
         ))}
       </ScrollView>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
