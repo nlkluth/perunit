@@ -6,7 +6,8 @@ import {
   Text,
   StyleSheet,
   KeyboardAvoidingView,
-  StatusBar
+  StatusBar,
+  View
 } from 'react-native';
 import Header from '../components/Header';
 import FormulaInput from '../components/FormulaInput';
@@ -22,25 +23,30 @@ const FormulaDetail = ({ navigation, screenProps }: formulaDetailType) => {
   }
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior="height"
-      keyboardVerticalOffset={66}
-    >
+    <View style={styles.container}>
       <StatusBar barStyle="light-content" />
       <Header formula={formula} />
-      <ScrollView style={styles.inputContainer}>
-        {formula.inputs.map((inputName, index) => (
-          <FormulaInput
-            key={inputName}
-            firstIndex={index === 0}
-            input={screenProps.inputs[inputName]}
-            formula={formula}
-            onChange={screenProps.onChange}
-          />
-        ))}
-      </ScrollView>
-    </KeyboardAvoidingView>
+      <KeyboardAvoidingView
+        behavior="height"
+        keyboardVerticalOffset={66}
+        style={styles.container}
+      >
+        <ScrollView
+          style={styles.inputContainer}
+          keyboardShouldPersistTaps="always"
+        >
+          {formula.inputs.map((inputName, index) => (
+            <FormulaInput
+              key={inputName}
+              firstIndex={index === 0}
+              input={screenProps.inputs[inputName]}
+              formula={formula}
+              onChange={screenProps.onChange}
+            />
+          ))}
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </View>
   );
 };
 
