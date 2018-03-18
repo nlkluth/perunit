@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     fontSize: 32
   },
   label: {
-    fontSize: 20,
+    fontSize: 15,
     opacity: 0.7
   },
   labelError: {
