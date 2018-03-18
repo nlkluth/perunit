@@ -11,7 +11,9 @@ const FormulaInput = ({
   const errorMessage = input.error || formula.error;
   return (
     <View>
-      <Text style={errorMessage ? styles.labelError : null}>
+      <Text
+        style={errorMessage ? [styles.label, styles.labelError] : styles.label}
+      >
         {input.name} ({input.units}) {errorMessage}
       </Text>
       <TextInput
@@ -35,6 +37,10 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     marginBottom: 12,
     fontSize: 32
+  },
+  label: {
+    fontSize: 20,
+    opacity: 0.7
   },
   labelError: {
     color: colors.red
