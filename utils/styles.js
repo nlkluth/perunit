@@ -9,4 +9,12 @@ const colors = {
   red: '#e74c3c' // b76363'
 };
 
-export { colors };
+const headerStyles = {
+  flexBasis: '12%',
+  borderWidth: 2,
+  paddingBottom: 6,
+  borderColor: colors.purple,
+  backgroundColor: colors.purple
+};
+
+export { colors, headerStyles };

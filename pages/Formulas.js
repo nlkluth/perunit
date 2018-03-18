@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { FlatList, View, StyleSheet, StatusBar } from 'react-native';
-import { colors } from '../utils/styles';
+import { colors, headerStyles } from '../utils/styles';
 import ListItem from '../components/ListItem';
 
 type props = {
@@ -22,6 +22,7 @@ const Formulas = ({ navigation, screenProps }: props) => {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
+      <View style={styles.header} />
       <View style={styles.bg} />
       <View style={styles.list}>
         <FlatList
@@ -36,12 +37,13 @@ const Formulas = ({ navigation, screenProps }: props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'stretch',
     backgroundColor: colors.purple
+  },
+  header: {
+    ...headerStyles
   },
   bg: {
     backgroundColor: '#eee',
-    marginTop: '20%',
     height: '100%'
   },
   list: {

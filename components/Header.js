@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { colors } from '../utils/styles';
+import { colors, headerStyles } from '../utils/styles';
 
 type properties = {
   formula: {
@@ -42,10 +42,7 @@ const Header = ({ formula }: properties) => {
 
 const styles = StyleSheet.create({
   header: {
-    flexBasis: '12%',
-    borderWidth: 2,
-    paddingBottom: 6,
-    borderColor: colors.purple,
+    ...headerStyles,
     backgroundColor: colors.purple,
     display: 'flex',
     alignItems: 'flex-end',
