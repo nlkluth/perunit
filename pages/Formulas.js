@@ -22,6 +22,7 @@ const Formulas = ({ navigation, screenProps }: props) => {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
+      <View style={styles.bg} />
       <View style={styles.list}>
         <FlatList
           data={screenProps.formulas}
@@ -38,12 +39,22 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     backgroundColor: colors.purple
   },
+  bg: {
+    backgroundColor: '#eee',
+    marginTop: '20%',
+    height: '100%'
+  },
   list: {
     backgroundColor: colors.white,
+    position: 'absolute',
     width: '90%',
     alignSelf: 'center',
     borderRadius: 5,
-    flex: 1
+    flex: 1,
+    shadowOpacity: 0.3,
+    shadowOffset: {
+      height: 3
+    }
   }
 });
 
