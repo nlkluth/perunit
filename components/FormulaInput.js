@@ -12,7 +12,10 @@ const FormulaInput = ({
   return (
     <View>
       <Text
-        style={errorMessage ? [styles.label, styles.labelError] : styles.label}
+        style={[
+          styles.label,
+          errorMessage ? styles.labelError : styles.labelNormal
+        ]}
       >
         {input.name} ({input.units}) {errorMessage}
       </Text>
@@ -39,7 +42,9 @@ const styles = StyleSheet.create({
     fontSize: 32
   },
   label: {
-    fontSize: 15,
+    fontSize: 15
+  },
+  labelNormal: {
     opacity: 0.7
   },
   labelError: {
