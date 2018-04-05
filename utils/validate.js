@@ -1,6 +1,13 @@
 // @flow
+const numberRegex = /^(\d*\.)?\d+$/;
 
 export function validateInput(number: string): string {
+  const match = number.match(numberRegex);
+
+  if (!match) {
+    return 'Enter a valid number';
+  }
+
   const value = parseFloat(number);
 
   if (value === undefined || Number.isNaN(value)) {
