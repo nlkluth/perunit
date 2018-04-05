@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { colors, headerStyles } from '../utils/styles';
+import { colors, headerStyles, zIndex } from '../utils/styles';
 
 type properties = {
   formula: {
@@ -43,16 +43,12 @@ const Header = ({ formula }: properties) => {
 const styles = StyleSheet.create({
   header: {
     ...headerStyles,
-    backgroundColor: colors.purple,
     display: 'flex',
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
-    shadowOpacity: 0.3,
-    shadowOffset: {
-      height: 3
-    },
     paddingRight: 4,
-    paddingLeft: 4
+    paddingLeft: 4,
+    zIndex: zIndex.top
   },
   formulaResult: {
     color: colors.white,

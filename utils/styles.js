@@ -1,6 +1,11 @@
 // @flow
 
-const colors = {
+export const zIndex = {
+  top: 2,
+  middle: 1
+};
+
+export const colors = {
   blue: '#889dad',
   purple: '#343d82', // 888899
   black: '#2e2e2e',
@@ -9,12 +14,14 @@ const colors = {
   red: '#e74c3c' // b76363'
 };
 
-const headerStyles = {
+export const headerStyles = {
   flexBasis: '12%',
   borderWidth: 2,
   paddingBottom: 6,
   borderColor: colors.purple,
-  backgroundColor: colors.purple
+  backgroundColor: colors.purple,
+  shadowOpacity: 0.3,
+  shadowOffset: {
+    height: 3
+  }
 };
-
-export { colors, headerStyles };
