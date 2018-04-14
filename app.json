@@ -1,5 +1,16 @@
 {
   "expo": {
-    "sdkVersion": "24.0.0"
+    "sdkVersion": "24.0.0",
+    "android": {
+      "package": "io.kilowatt.perunit"
+    },
+    "name": "perunit",
+    "slug": "perunit",
+    "version": "0.1.0",
+    "isDetached": true,
+    "detach": {
+      "scheme": "exped472739b98b4b5188056f04b4eb2765",
+      "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.2.0-sdk24.0.0-16620828-4df4-4e2d-b0af-5dc1352b82cb.tar.gz"
+    }
   }
 }
