@@ -14,18 +14,8 @@ export function validateInput(number: string): string {
     return 'Number required';
   }
 
-  if (
-    value === Number.POSITIVE_INFINITY ||
-    value === Number.NEGATIVE_INFINITY
-  ) {
+  if (value > Number.MAX_SAFE_INTEGER || value < -Number.MAX_SAFE_INTEGER) {
     return 'Number too large';
-  }
-
-  if (
-    value === Number.POSITIVE_INFINITY ||
-    value === Number.NEGATIVE_INFINITY
-  ) {
-    return 'Result too large';
   }
 
   if (isNaN(value) || typeof value !== 'number') {
@@ -39,10 +29,15 @@ export function validateResult(result: string, number: string): string {
   const value = parseFloat(result);
 
   if (
-    value === Number.POSITIVE_INFINITY ||
-    value === Number.NEGATIVE_INFINITY
+    (value === Number.POSITIVE_INFINITY ||
+      value === Number.NEGATIVE_INFINITY) &&
+    parseFloat(number) === 0
   ) {
-    return parseFloat(number) === 0 ? 'Cannot divide by 0' : 'Number too large';
+    return 'Cannot divide by 0';
+  }
+
+  if (value > Number.MAX_SAFE_INTEGER || value < -Number.MAX_SAFE_INTEGER) {
+    return 'Number too large';
   }
 
   if (isNaN(value) || typeof value !== 'number') {
