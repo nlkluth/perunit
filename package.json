@@ -9,7 +9,7 @@
     "eslint-plugin-react": "^7.6.0",
     "eslint-plugin-react-native": "^3.2.1",
     "flow-bin": "^0.64.0",
-    "jest-expo": "^24.0.0",
+    "jest-expo": "^27.0.0",
     "prettier": "^1.10.2",
     "react-test-renderer": "^16.2.0"
   },
@@ -23,14 +23,13 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "appcenter": "^1.4.0",
-    "appcenter-analytics": "^1.4.0",
-    "appcenter-crashes": "^1.4.0",
-    "expo": "^24.0.0",
+    "appcenter": "^1.5.0",
+    "appcenter-analytics": "^1.5.0",
+    "appcenter-crashes": "^1.5.0",
+    "expo": "^27.0.0",
     "immutability-helper": "^2.6.4",
     "react": "^16.2.0",
-    "react-native":
-      "https://github.com/expo/react-native/archive/sdk-24.0.0.tar.gz",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-27.0.0.tar.gz",
     "react-navigation": "^1.0.0-beta.27"
   }
 }
