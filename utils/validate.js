@@ -1,5 +1,5 @@
 // @flow
-const numberRegex = /^(\d*\.)?\d+$/;
+const numberRegex = /^(\d+)?([.]?\d{0,2})?$/;
 
 export function validateInput(number: string): string {
   const match = number.match(numberRegex);
