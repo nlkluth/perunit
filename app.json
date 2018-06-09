@@ -10,7 +10,14 @@
     "isDetached": true,
     "detach": {
       "scheme": "exped472739b98b4b5188056f04b4eb2765",
-      "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.2.0-sdk24.0.0-16620828-4df4-4e2d-b0af-5dc1352b82cb.tar.gz"
+      "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.2.0-sdk24.0.0-16620828-4df4-4e2d-b0af-5dc1352b82cb.tar.gz",
+      "iosExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/ios-v2.5.4-sdk27.0.0-e68cfb94-9b7e-4510-aab9-8f375e187b0b.tar.gz"
+    },
+    "scheme": "exp4114a5990b174774b28ac2e1eb29170b",
+    "ios": {
+      "bundleIdentifier": "io.kilowatt.perunit",
+      "publishBundlePath": "ios/perunit/Supporting/shell-app.bundle",
+      "publishManifestPath": "ios/perunit/Supporting/shell-app-manifest.json"
     }
   }
 }
