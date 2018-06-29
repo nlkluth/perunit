@@ -15,10 +15,70 @@
   <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 </head>
 
-<body>
+<body class="no-js">
   <!--[if lte IE 9]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
+
+  <h1>Per unit calculator</h1>
+
+  <div class="formula">
+    <h2>Base Impedance</h2>
+    <form name="base_impedance">
+      <input type="hidden" name="form" value="base_impedance" />
+      <label for="power">
+        Power (KV)
+        <input id="power" type="number" name="power" />
+      </label>
+      <label for="voltage">
+        Voltage (MVA)
+        <input id="voltage" type="number" name="voltage" />
+      </label>
+      <button type="submit">
+        Calculate
+      </button>
+    </form>
+  </div>
+
+  <div class="formula">
+    <h2>Base Current</h2>
+    <form name="base_current">
+      <input type="hidden" name="form" value="base_current" />
+      <label for="power">
+        Power (KV)
+        <input id="power" type="number" name="power" />
+      </label>
+      <label for="voltage">
+        Voltage (MVA)
+        <input id="voltage" type="number" name="voltage" />
+      </label>
+      <button type="submit">
+        Calculate
+      </button>
+    </form>
+  </div>
+
+  <div class="formula">
+    <h2>Per Unit Impedance</h2>
+    <form name="per_unit_impedance">
+      <input type="hidden" name="form" value="per_unit_impedance" />
+      <label for="power">
+        Power (KV)
+        <input id="power" type="number" name="power" />
+      </label>
+      <label for="voltage">
+        Voltage (MVA)
+        <input id="voltage" type="number" name="voltage" />
+      </label>
+      <label for="ohms">
+        Ohms
+        <input id="ohms" type="number" name="ohms" />
+      </label>
+      <button type="submit">
+        Calculate
+      </button>
+    </form>
+  </div>
 
   <script src="main.js"></script>
 </body>

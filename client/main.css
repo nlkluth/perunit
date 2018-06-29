@@ -341,3 +341,20 @@ template {
 [hidden] {
   display: none;
 }
+
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.js .formula {
+  display: none;
+}
+
+.js .formula.active {
+  display: block;
+}
