@@ -13,6 +13,10 @@ function setInitialState() {
   const activeForm = 'base_impedance';
 
   document.querySelectorAll('.formula').forEach(element => {
+    if (!element.querySelector('form')) {
+      return;
+    }
+
     if (element.querySelector('form').name === activeForm) {
       element.classList.add('active');
     }
