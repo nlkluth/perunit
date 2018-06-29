@@ -11,16 +11,13 @@ function setJSEnabled() {
 
 function setInitialState() {
   const activeForm = 'base_impedance';
+  const form = document.querySelector(`.formula form[name="${activeForm}"]`);
 
-  document.querySelectorAll('.formula').forEach(element => {
-    if (!element.querySelector('form')) {
-      return;
-    }
+  if (!form) {
+    return;
+  }
 
-    if (element.querySelector('form').name === activeForm) {
-      element.classList.add('active');
-    }
-  });
+  form.closest('.formula').classList.add('active');
 }
 
 function start() {
