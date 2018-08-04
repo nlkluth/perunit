@@ -8,7 +8,6 @@ import Formulas from './pages/Formulas';
 import { baseCurrent, baseImpedance, perUnitImpedance } from './utils/formulas';
 import * as validation from './utils/validate';
 import { colors } from './utils/styles';
-import Analytics from 'appcenter-analytics';
 
 const Nav = StackNavigator(
   {
@@ -56,7 +55,6 @@ export default class App extends React.Component<State> {
 
   constructor(props: Object) {
     super(props);
-    // Analytics.setEnabled(true);
 
     this.state = {
       inputs: {
